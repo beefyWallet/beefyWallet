@@ -2,7 +2,6 @@
 
 ## Students Names
 
-
 - Abdullah Al Sawalmeh.
 - Abdelhadi Nofal.
 - Amarah Ayman [Team leader].
@@ -18,7 +17,7 @@ Each member in the team has his own special strength point, but all of us have P
 By assigning each team member to do the task that most fit him/her.
 
 **In which professional competencies do you each want to develop greater strength?**
-Machine and deep learning 
+Machine and deep learning
 
 **Knowing that every person in your team needs to understand all aspects of the project, how do you plan to approach the day-to-day work?**
 By using communication channels like Slack and Discord.
@@ -29,8 +28,8 @@ By using communication channels like Slack and Discord.
 Tell him that this is a group project and all of us should work on it, we appreciate that you try to do all the work but we are here to learn so we need to work toghter.
 
 **How will you approach each other and the challenges of the project knowing that it is impossible for all members to be at the exact same place in understanding and skill level?**
-At beginning we will agree on many aspects for proceeding our project. we will try to work in pairs for example as a driver and navigator. 
-We will try to minimize  this specific  case . 
+At beginning we will agree on many aspects for proceeding our project. we will try to work in pairs for example as a driver and navigator.
+We will try to minimize this specific case .
 And If it happened we will make him/her explain code for us. And keep going.
 
 **What is the group process to resolve conflict, when it arises?**
@@ -53,7 +52,7 @@ When one of the team members cross the borders, by cursing or underestimating ot
 **What platforms will you use to communicate (ie. Slack, phone …)?**
 Slack, Discord
 
-**How often will you take breaks?** 
+**How often will you take breaks?**
 2pm - 3pm
 10pm - 12am
 
