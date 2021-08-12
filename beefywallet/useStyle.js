@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
+import BeefyWalletAdmin from './src/context/BeefyWalletAdmin'
 const drawerWidth = 240
 
 const useStyles = makeStyles(theme => ({
@@ -85,3 +86,4 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default useStyles
+// useStyles.Layout = BeefyWalletAdmin
