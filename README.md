@@ -15,6 +15,26 @@ To create web app for track user's money sources and it have a chart for help us
 
 ## Wireframes
 
+### Advices
+
+![](assets/advices.jpg)
+
+### Discount
+
+![](assets/discounts.jpg)
+
+### login page
+
+![](assets/loginpage.jpg)
+
+### Profile page
+
+![](assets/profilepage.jpg)
+
+### Records
+
+![](assets/record.jpg)
+
 ## User Stories
 
 1. As an admin , I want to have access to all API data
@@ -36,3 +56,5 @@ when the user enters the web page, he starts by logging into our website with th
 ![wF](./assets/wireframeModeling.png)
 
 ## Database Schema Diagram
+
+![Database](./assets/wallet.jpg)

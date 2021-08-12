@@ -107,3 +107,7 @@ Using GitHub.
 **4- How will you communicate that it’s time to merge?**
 
 Slack my team.
+
+### Trello Tasks
+
+### [trello](https://trello.com/b/HoLXA3jc/beefy-wallet)
