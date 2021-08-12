@@ -9,7 +9,12 @@ import Brightness3Icon from '@material-ui/icons/Brightness3'
 import clsx from 'clsx'
 import React from 'react'
 
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+
 const TopBar = ({ open, setOpen, classes }) => {
+  // const [theme, setTheme] = React.useState('light')
+  // const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`)
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
