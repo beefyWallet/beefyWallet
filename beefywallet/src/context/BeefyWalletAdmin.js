@@ -1,7 +1,8 @@
 import BeefyWalletHeaderAndSideBar from './BeefyWalletHeaderAndSideBar'
 import BeefyWalletMain from './BeefyWalletMain'
+import { useRouter } from 'next/dist/client/router'
+
 const BeefyWalletAdmin = ({ children }) => {
-  console.log(children[1].type[1])
   return (
     <>
       <BeefyWalletHeaderAndSideBar>

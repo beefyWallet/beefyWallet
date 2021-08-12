@@ -16,7 +16,7 @@ export default function DashboardPage() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.initiallyHeight}>
-            <h1>Good Morning ,Mr.Unkown</h1>
+            <h1 className="text-2xl">Dashboard</h1>
           </Paper>
         </Grid>
 

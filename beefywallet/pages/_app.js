@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import HeadHtml from '../src/context/headHtml'
-
+import { useState } from 'react'
 export default function MyApp(props) {
+  const [name, setName] = useState('ww')
   const { Component, pageProps } = props
   const Layout = Component.Layout || DefaultLayout
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -25,7 +26,7 @@ export default function MyApp(props) {
     <React.Fragment>
       <HeadHtml title={'Beefy Wallet'}></HeadHtml>
       <ThemeProvider theme={theme}>
-        <Layout>
+        <Layout setName={setName} name={name}>
           <CssBaseline />
           <Component {...pageProps} />
         </Layout>

@@ -15,7 +15,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import Link from 'next/link'
 export const mainListItems = (
   <div>
-    <Link href="/app">
+    <Link href={{ pathname: '/app' }}>
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />

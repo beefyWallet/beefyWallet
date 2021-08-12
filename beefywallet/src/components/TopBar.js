@@ -36,7 +36,7 @@ const TopBar = ({ open, setOpen, classes }) => {
         noWrap
         className={classes.title}
       >
-        Dashboard
+        Mr.Uknown
       </Typography>
       <IconButton color="inherit">
         <Badge badgeContent={4} color="secondary">
