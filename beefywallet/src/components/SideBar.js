@@ -7,8 +7,6 @@ import { mainListItems, secondaryListItems } from '../components/listItems'
 import clsx from 'clsx'
 
 const SideBar = ({ setOpen, open, classes }) => {
-  console.log(open, '  side   open')
-
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -22,7 +20,7 @@ const SideBar = ({ setOpen, open, classes }) => {
       open={open}
     >
       <div className={classes.toolbarIcon}>
-        <h4>Mr.Unkown</h4>
+        <h4>beefy</h4>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>

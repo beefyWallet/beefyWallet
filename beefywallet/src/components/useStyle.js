@@ -78,6 +78,10 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  initiallyHeight: {
+    padding: theme.spacing(2),
+    height: 50,
+  },
 }))
 
 export default useStyles

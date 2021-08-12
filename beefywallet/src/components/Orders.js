@@ -7,13 +7,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Title from './Title'
-
-// Generate Order Data
-function createData(id, date, name, source, paymentMethod, amount) {
-  return { id, date, name, source, paymentMethod, amount }
-}
-
-const rows = [createData(0, '2021', 'Mr.unkown', 'bank', 'VISA', 100)]
+import data from '../../data'
 
 function preventDefault(event) {
   event.preventDefault()
@@ -34,20 +28,34 @@ export default function Orders() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
             <TableCell>Source</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>expenses</TableCell>
+            <TableCell>incomes</TableCell>
+            <TableCell align="right">Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {data[0].money_sources.map(row => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
+              <TableCell>0000</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.source}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell>
+                {row.expenses.reduce(
+                  (sum, expense) => sum + parseInt(expense.value),
+                  0
+                )}
+              </TableCell>
+
+              <TableCell>
+                {row.incomes.reduce(
+                  (sum, income) => sum + parseInt(income.value),
+                  0
+                )}
+              </TableCell>
+              <TableCell align="right">
+                {row.amount}
+                {row.currency}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
