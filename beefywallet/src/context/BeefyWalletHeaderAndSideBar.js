@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import AppBar from '@material-ui/core/AppBar'
 import SideBar from '../components/SideBar'
 import TopBar from '../components/TopBar'
-import useStyles from '../components/useStyle'
+import useStyles from '../../useStyle'
 
 export default function BeefyWalletHeaderAndSideBar({ children }) {
   const classes = useStyles()

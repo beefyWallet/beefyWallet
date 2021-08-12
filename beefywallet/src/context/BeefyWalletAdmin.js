@@ -1,11 +1,10 @@
 import BeefyWalletHeaderAndSideBar from './BeefyWalletHeaderAndSideBar'
-import Dashboard from '../pages/Dashboard'
 import BeefyWalletMain from './BeefyWalletMain'
-const BeefyWalletAdmin = () => {
+const BeefyWalletAdmin = ({ children }) => {
   return (
     <>
       <BeefyWalletHeaderAndSideBar>
-        <BeefyWalletMain />
+        <BeefyWalletMain>{children}</BeefyWalletMain>
       </BeefyWalletHeaderAndSideBar>
     </>
   )

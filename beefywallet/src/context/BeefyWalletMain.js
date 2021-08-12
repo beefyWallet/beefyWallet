@@ -1,18 +1,17 @@
 import React from 'react'
-import clsx from 'clsx'
-import useStyles from '../components/useStyle'
+import useStyles from '../../useStyle'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import BeefyWalletFooter from '../context/BeefyWalletFooter'
-import Dashboard from '../pages/Dashboard'
-export default function BeefyWalletMain() {
+
+export default function BeefyWalletMain({ children }) {
   const classes = useStyles()
 
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.container}>
-        <Dashboard />
+        {children}
         <Box pt={4}>
           <BeefyWalletFooter />
         </Box>

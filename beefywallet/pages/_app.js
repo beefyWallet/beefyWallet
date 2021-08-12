@@ -8,7 +8,7 @@ import HeadHtml from '../src/context/headHtml'
 
 export default function MyApp(props) {
   const { Component, pageProps } = props
-
+  const Layout = Component.Layout || DefaultLayout
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const theme = React.useMemo(
@@ -25,8 +25,10 @@ export default function MyApp(props) {
     <React.Fragment>
       <HeadHtml title={'Beefy Wallet'}></HeadHtml>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </React.Fragment>
   )
@@ -36,3 +38,5 @@ MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 }
+
+const DefaultLayout = ({ children }) => <>{children}</>
