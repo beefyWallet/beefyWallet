@@ -32,6 +32,10 @@ const currencies = [
     value: 'JPY',
     label: '¥',
   },
+  {
+    value: 'JOD',
+    label: 'JOD',
+  },
 ]
 
 const useStyles = makeStyles(theme => ({
@@ -66,69 +70,75 @@ export default function Variants() {
   const [open, setOpen] = React.useState(false)
   const [source, setSource] = React.useState('')
   const [amount, setAmount] = React.useState('')
-  const [transaction, setTransaction] = React.useState('')
+  // const [transaction, setTransaction] = React.useState('')
   const [currency, setCurrency] = React.useState('')
-  const [note, setNote] = React.useState('')
+  // const [note, setNote] = React.useState('')
 
   const handlerMoneySource = event => {
     setSource(event.target.value || '')
   }
-  const handleTransaction = event => {
-    setTransaction(event.target.value || '')
-  }
+  // const handleTransaction = event => {
+  //   setTransaction(event.target.value || '')
+  // }
   const amountHandler = event => {
-    setAmount(event.target.value || '')
+    setAmount(parseFloat(event.target.value) || '')
   }
 
   const handleCurrency = event => {
     setCurrency(event.target.value || '')
   }
 
-  const handlerNote = event => {
-    setNote(event.target.value || '')
-  }
+  // const handlerNote = event => {
+  //   setNote(event.target.value || '')
+  // }
   const handleClickOpen = () => {
     setOpen(true)
   }
 
   const handleClose = () => {
-    console.log(source, ' ', amount, ' ', currency, ' ', transaction, ' ')
     setOpen(false)
 
-    const x = data[0].money_sources.filter(item => item.name == source)
-    const sourceData = {
-      id: x.length.toString(),
-      value: amount.toString(),
-      note: note,
-      transaction_date: '2021',
+    const newSource = data2[0].money_sources.filter(item => item.name == source)
+    if (newSource.length == 0) {
+      const newSourceAdded = {
+        id: (data2[0].money_sources.length + 1).toString(),
+        name: source,
+        expenses: [],
+        incomes: [],
+        amount: amount,
+        currency: currency,
+      }
+      setData2(prevData2 => [
+        ...prevData2,
+        data2[0].money_sources.push(newSourceAdded),
+      ])
+    } else {
+      setData2(prevData2 => [...prevData2, (newSource[0].amount += amount)])
+      console.log(newSource[0])
     }
-    // setData2(prevData2=>[...prevData2, ])
-
-    x[0][transaction].push(sourceData)
-    console.log(x[0][transaction])
+    // console.log(newSource[0][transaction].length)
+    // const sourceData = {
+    //   id: (newSource[0][transaction].length + 1).toString(),
+    //   value: amount.toString(),
+    //   note: note,
+    //   transaction_date: '2021',
+    // }
+    // setData2(prevData2 => [...prevData2, newSource[0][transaction].push(sourceData)])
   }
+  React.useEffect(() => {}, [data2])
 
   return (
     <React.Fragment>
-      {data[0].money_sources.map(moneySource => (
-        <grid key={moneySource.id} className={classes.root}>
+      {data2[0].money_sources.map(moneySource => (
+        <Grid key={moneySource.id} className={classes.root}>
           <Paper elevation={3}>
             <h3>{moneySource.name}</h3>
-
             <h4>
-              {moneySource.incomes.reduce(
-                (sum, incomeValue) => (sum += parseInt(incomeValue.value)),
-                0
-              )}
-            </h4>
-            <h4>
-              {moneySource.expenses.reduce(
-                (sum, incomeValue) => (sum += parseInt(incomeValue.value)),
-                0
-              )}
+              {moneySource.amount}
+              {moneySource.currency}
             </h4>
           </Paper>
-        </grid>
+        </Grid>
       ))}
 
       <div>
@@ -159,7 +169,7 @@ export default function Variants() {
                 </TextField>
               </FormControl>
 
-              <FormControl className={classes.formControl}>
+              {/* <FormControl className={classes.formControl}>
                 <TextField
                   label="Transaction"
                   select
@@ -171,7 +181,7 @@ export default function Variants() {
                   <MenuItem value="incomes">Income</MenuItem>
                   <MenuItem value="expenses">Expense</MenuItem>
                 </TextField>
-              </FormControl>
+              </FormControl> */}
 
               <FormControl className={classes.formControl}>
                 <TextField
@@ -201,7 +211,7 @@ export default function Variants() {
                   ))}
                 </TextField>
               </FormControl>
-              <FormControl>
+              {/* <FormControl>
                 <TextField
                   id="note"
                   label="Notes"
@@ -212,7 +222,7 @@ export default function Variants() {
                   rows={5}
                   variant="outlined"
                 />
-              </FormControl>
+              </FormControl> */}
             </form>
           </DialogContent>
           <DialogActions>
