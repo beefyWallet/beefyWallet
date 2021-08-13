@@ -7,17 +7,23 @@ import Deposits from '../../src/components/Deposits'
 import Orders from '../../src/components/Orders'
 import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
 import React from 'react'
+import Variants from '../../src/components/AddSources'
+
 export default function DashboardPage() {
   const classes = useStyles()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   return (
     <React.Fragment>
+      <Grid item xs={12}>
+        <Paper className={classes.initiallyHeight}>
+          <h1 className="text-2xl">Dashboard</h1>
+        </Paper>
+      </Grid>
+
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.initiallyHeight}>
-            <h1 className="text-2xl">Dashboard</h1>
-          </Paper>
+          <Variants />
         </Grid>
 
         <Grid item xs={12} md={8} lg={9}>
