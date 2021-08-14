@@ -69,31 +69,6 @@ class TransactionsViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     user = self.request.user
-    #     print('###############################',user)
-    #     expenses = Expenses.objects.filter(money_source__author__username = user)
-    #     serializer = ExpensesSerializer(expenses, many=True)
-    #     return Response(serializer.data)
-
-
-# 
-# class IncomesViewSet(viewsets.ModelViewSet):
-# 
-#     serializer_class = IncomesSerializer
-# 
-#     def get_queryset(self):
-#         incomes = Incomes.objects.all()
-#         return incomes
-# 
-# 
-#     def retrieve(self, request, *args, **kwargs):
-#         user = self.request.user
-#         incomes = Incomes.objects.filter(money_source__author = user)
-#         serializer = IncomesSerializer(incomes, many=True)
-#         return Response(serializer.data)
-
-
     
 
 class MoneySourcesViewSet(viewsets.ModelViewSet):
@@ -117,6 +92,34 @@ class MoneySourcesViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
+    def update(self, request, *args, **kwargs):
+        user = self.request.user
+        moeny_source = self.get_object()
+        moeny_source_data = request.data
+
+        moeny_source.name = moeny_source_data['name']
+        moeny_source.amount = moeny_source_data['amount']
+        moeny_source.author = User.objects.get(username=user)
+
+        moeny_source.save()
+
+        serializer = MoneySourcesSerializer(moeny_source)
+
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        user = self.request.user
+        moeny_source = self.get_object()
+        moeny_source_data = request.data
+
+        moeny_source.name = moeny_source_data.get('name',moeny_source.name)
+        moeny_source.amount = moeny_source_data.get('amount',moeny_source.amount)
+
+        moeny_source.save()
+
+        serializer = MoneySourcesSerializer(moeny_source)
+
+        return Response(serializer.data)
 
 # class StudentsViewSet(viewsets.ModelViewSet):
 #     serializer_class = StudentsSerializer
