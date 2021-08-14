@@ -31,7 +31,6 @@ class TransactionsViewSet(viewsets.ModelViewSet):
         user = self.request.user
         transaction = self.get_object()
         expenses_incomes_data = request.data
-        print(expenses_incomes_data)
 
         money_source=MoneySources.objects.get(name=expenses_incomes_data['money_source'],author__username = user)
 
@@ -40,6 +39,28 @@ class TransactionsViewSet(viewsets.ModelViewSet):
         transaction.transaction_type = expenses_incomes_data["transaction_type"]
         transaction.note = expenses_incomes_data["note"]
         transaction.creation_date = expenses_incomes_data["creation_date"]
+
+        transaction.save()
+
+        serializer = TransactionsSerializer(transaction)
+
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        user = self.request.user
+        transaction = self.get_object()
+        expenses_incomes_data = request.data
+
+        try:
+            money_source=MoneySources.objects.get(name=expenses_incomes_data['money_source'],author__username = user)
+            transaction.money_source = money_source
+        except KeyError:
+            pass
+
+        transaction.value = expenses_incomes_data.get("value", transaction.value)
+        transaction.transaction_type = expenses_incomes_data.get("transaction_type", transaction.transaction_type)
+        transaction.note = expenses_incomes_data.get("note", transaction.note)
+        transaction.creation_date = expenses_incomes_data.get("creation_date", transaction.creation_date)
 
         transaction.save()
 
