@@ -27,6 +27,27 @@ class TransactionsViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+    def update(self, request, *args, **kwargs):
+        user = self.request.user
+        transaction = self.get_object()
+        expenses_incomes_data = request.data
+        print(expenses_incomes_data)
+
+        money_source=MoneySources.objects.get(name=expenses_incomes_data['money_source'],author__username = user)
+
+        transaction.money_source = money_source
+        transaction.value = expenses_incomes_data["value"]
+        transaction.transaction_type = expenses_incomes_data["transaction_type"]
+        transaction.note = expenses_incomes_data["note"]
+        transaction.creation_date = expenses_incomes_data["creation_date"]
+
+        transaction.save()
+
+        serializer = TransactionsSerializer(transaction)
+
+        return Response(serializer.data)
+
+
     # def retrieve(self, request, *args, **kwargs):
     #     user = self.request.user
     #     print('###############################',user)
