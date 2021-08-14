@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 
 class TransactionsViewSet(viewsets.ModelViewSet):
-
     serializer_class = TransactionsSerializer
 
     def get_queryset(self):
@@ -69,8 +68,6 @@ class TransactionsViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-    
-
 class MoneySourcesViewSet(viewsets.ModelViewSet):
     serializer_class = MoneySourcesSerializer
 
@@ -100,7 +97,6 @@ class MoneySourcesViewSet(viewsets.ModelViewSet):
         moeny_source.name = moeny_source_data['name']
         moeny_source.amount = moeny_source_data['amount']
         moeny_source.author = User.objects.get(username=user)
-
         moeny_source.save()
 
         serializer = MoneySourcesSerializer(moeny_source)
@@ -120,34 +116,3 @@ class MoneySourcesViewSet(viewsets.ModelViewSet):
         serializer = MoneySourcesSerializer(moeny_source)
 
         return Response(serializer.data)
-
-# class StudentsViewSet(viewsets.ModelViewSet):
-#     serializer_class = StudentsSerializer
-# 
-#     def get_queryset(self):
-#         student = Students.objects.all()
-#         return student
-# 
-#     def create(self, request, *args, **kwargs):
-#         data = request.data
-# 
-#         new_student = Students.objects.create(
-#             name=data["name"], age=data['age'], grade=data["grade"])
-# 
-#         new_student.save()
-# 
-#         for module in data["modules"]:
-#             module_obj = Modules.objects.get(module_name=module["module_name"])
-#             new_student.modules.add(module_obj)
-# 
-#         serializer = StudentsSerializer(new_student)
-# 
-#         return Response(serializer.data)
-# 
-# 
-# class MoneySourcesViewSet(viewsets.ModelViewSet):
-#     serializer_class = MoneySourcesSerializer
-# 
-#     def get_queryset(self):
-#         module = MoneySources.objects.all()
-#         return module
