@@ -11,3 +11,8 @@ poetry add whitenoise
 poetry add django-environ
 poetry add psycopg2-binary
 heroku apps:create beefy-wallet-api
+heroku stack:set container --app beefy-wallet-api
+heroku stack:set heroku-20
+gunicorn core.wsgi 
+heroku git:remote -a beefy-wallet-api
+git push heroku backend01
