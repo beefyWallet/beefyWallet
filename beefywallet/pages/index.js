@@ -1,4 +1,5 @@
-import BeefyWalletAdmin from '../src/context/BeefyWalletAdmin'
+import BeefyWalletAdmin from "../src/context/BeefyWalletAdmin";
+import Dashboard from "../src/context/Dashboard";
 export default function Home() {
-  return <BeefyWalletAdmin />
+  return <Dashboard />;
 }
