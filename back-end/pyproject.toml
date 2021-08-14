@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "back-end"
+version = "0.1.0"
+description = ""
+authors = ["abdullah-alsawalmeh <abdullahalsawalmeh@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.2.6"
+djangorestframework = "^3.12.4"
+django-rest-auth = "^0.9.5"
+django-allauth = "^0.45.0"
+djangorestframework-simplejwt = "^4.7.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

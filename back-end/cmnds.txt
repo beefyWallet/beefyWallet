@@ -1,0 +1,7 @@
+poetry init -n
+poetry shell
+poetry add django
+poetry add djangorestframework
+poetry add django-rest-auth
+poetry add django-allauth
+poetry add djangorestframework-simplejwt
