@@ -15,61 +15,48 @@ import FormControl from '@material-ui/core/FormControl'
 import data from '../../data'
 import { TextField } from '@material-ui/core'
 import { Modal } from '@material-ui/core'
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-  {
-    value: 'JOD',
-    label: 'JOD',
-  },
-]
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    flexGrow: 1,
     '& > *': {
-      margin: theme.spacing(1),
+      margin: theme.spacing(2),
       width: theme.spacing(20),
       height: theme.spacing(10),
     },
-    initiallyPadding: {
-      margin: theme.spacing(10),
-    },
-    button: {
+  },
+  initiallyTopMargin: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(3),
+  },
+  button: {
+    margin: theme.spacing(1),
+    left: 20,
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing(2),
+    marginRight: 36,
+    minWidth: 120,
+  },
+  drawerPaper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
       margin: theme.spacing(1),
-      left: 20,
+      width: theme.spacing(16),
+      height: theme.spacing(4),
     },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    formControl: {
-      margin: theme.spacing(2),
-      marginRight: 36,
-      minWidth: 120,
-    },
-    drawerPaper: {
-      background: 'blue',
-      padding: theme.spacing(2),
-      display: 'flex',
-      overflow: 'auto',
-      flexDirection: 'column',
-    },
+  },
+  textField: {
+    margin: theme.spacing(1),
+    width: '25ch',
   },
 }))
 
@@ -83,7 +70,14 @@ export default function Variants() {
   // const [transaction, setTransaction] = React.useState('')
   const [currency, setCurrency] = React.useState('')
   // const [note, setNote] = React.useState('')
-  const [addNewItem, setAddNewItem] = React.useState('')
+  const [addNewItemOpen, setAddNewItemOpen] = React.useState(false)
+  const [addNewItemSource, setAddNewItemSource] = React.useState('')
+
+  const [dataMoneySource, setDataMoneySource] = React.useState([
+    'Bank',
+    'Backet',
+    'Closet',
+  ])
 
   const handlerMoneySource = event => {
     setSource(event.target.value || '')
@@ -103,14 +97,21 @@ export default function Variants() {
   //   setNote(event.target.value || '')
   // }
 
+  const addNewItemSourceHandler = event => {
+    setAddNewItemSource(event.target.value || '')
+  }
+
   const handleAddnewSourceItemOpen = () => {
-    setAddNewItem(false)
+    setAddNewItemOpen(true)
   }
 
   const handleAddnewSourceItemClose = () => {
-    setAddNewItem(true)
+    setAddNewItemOpen(false)
   }
-
+  const handleAddnewSourceItemCloseOk = () => {
+    setAddNewItemOpen(false)
+    setDataMoneySource(prevDataMoney => [...prevDataMoney, addNewItemSource])
+  }
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -119,25 +120,29 @@ export default function Variants() {
   }
   const handleCloseOk = () => {
     setOpen(false)
-
-    const newSource = data2[0].money_sources.filter(item => item.name == source)
-    if (newSource.length == 0) {
-      const newSourceAdded = {
-        id: (data2[0].money_sources.length + 1).toString(),
-        name: source,
-        expenses: [],
-        incomes: [],
-        amount: amount,
-        currency: currency,
+    if (source != 'add_new_Source') {
+      const newSource = data2[0].money_sources.filter(
+        item => item.name == source
+      )
+      if (newSource.length == 0) {
+        const newSourceAdded = {
+          id: (data2[0].money_sources.length + 1).toString(),
+          name: source,
+          expenses: [],
+          incomes: [],
+          amount: amount,
+          currency: currency,
+        }
+        setData2(prevData2 => [
+          ...prevData2,
+          data2[0].money_sources.push(newSourceAdded),
+        ])
+      } else {
+        setData2(prevData2 => [...prevData2, (newSource[0].amount += amount)])
+        console.log(newSource[0])
       }
-      setData2(prevData2 => [
-        ...prevData2,
-        data2[0].money_sources.push(newSourceAdded),
-      ])
-    } else {
-      setData2(prevData2 => [...prevData2, (newSource[0].amount += amount)])
-      console.log(newSource[0])
     }
+
     // console.log(newSource[0][transaction].length)
     // const sourceData = {
     //   id: (newSource[0][transaction].length + 1).toString(),
@@ -151,29 +156,32 @@ export default function Variants() {
 
   return (
     <React.Fragment>
-      <Grid className={classes.root}>
-        {data2[0].money_sources.map(moneySource => (
-          <div key={moneySource.id}>
-            <Paper elevation={3} className={classes.drawerPaper}>
-              <h3>{moneySource.name}</h3>
-              <h4>
-                {moneySource.amount}
-                {moneySource.currency}
-              </h4>
-            </Paper>
-          </div>
-        ))}
-      </Grid>
+      <Grid container spacing={3} className={classes.initiallyTopMargin}>
+        <div className={classes.root}>
+          {data2[0].money_sources.map(moneySource => (
+            <Grid item key={moneySource.id} xs={5} md={2} lg={2}>
+              <Paper className={classes.drawerPaper}>
+                <Typography component="p" variant="h6">
+                  {moneySource.name}
+                </Typography>
+                <Typography color="textSecondary">
+                  {moneySource.amount} {moneySource.currency}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </div>
 
-      <div>
-        <Button
-          variant="outlined"
-          size="large"
-          color="primary"
-          onClick={handleClickOpen}
-        >
-          Add new Source
-        </Button>
+        <Grid item xs={3}>
+          <Button
+            variant="outlined"
+            size="large"
+            color="primary"
+            onClick={handleClickOpen}
+          >
+            Add new Source
+          </Button>
+        </Grid>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>List Of Money Sources</DialogTitle>
           <DialogContent>
@@ -185,10 +193,16 @@ export default function Variants() {
                   value={source}
                   onChange={handlerMoneySource}
                   variant="outlined"
+                  className={classes.textField}
                 >
-                  <MenuItem value="Closet">Closet</MenuItem>
-                  <MenuItem value="Bank">Bank</MenuItem>
-                  <MenuItem value="Backet">Backet</MenuItem>
+                  {dataMoneySource.map((sourceItem, index) => (
+                    <MenuItem key={index + 1} value={sourceItem}>
+                      {sourceItem}
+                    </MenuItem>
+                  ))}
+
+                  {/* <MenuItem value="Bank">Bank</MenuItem>
+                  <MenuItem value="Backet">Backet</MenuItem> */}
                   <MenuItem
                     value="add_new_Source"
                     onClick={handleAddnewSourceItemOpen}
@@ -197,6 +211,39 @@ export default function Variants() {
                   </MenuItem>
                 </TextField>
               </FormControl>
+
+              <Dialog
+                open={addNewItemOpen}
+                onClose={handleAddnewSourceItemClose}
+              >
+                <DialogTitle>Add New Source</DialogTitle>
+                <DialogContent>
+                  <form className={classes.container}>
+                    <FormControl className={classes.formControl}>
+                      <TextField
+                        id="addNewItemSource"
+                        label="Add New Source"
+                        value={addNewItemSource}
+                        onChange={addNewItemSourceHandler}
+                        variant="outlined"
+                        className={classes.textField}
+                        required
+                      />
+                    </FormControl>
+                  </form>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleAddnewSourceItemClose} color="primary">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleAddnewSourceItemCloseOk}
+                    color="primary"
+                  >
+                    Ok
+                  </Button>
+                </DialogActions>
+              </Dialog>
 
               {/* <FormControl className={classes.formControl}>
                 <TextField
@@ -219,11 +266,13 @@ export default function Variants() {
                   value={amount}
                   onChange={amountHandler}
                   type="number"
-                  InputLabelProps={{ shrink: true }}
                   variant="outlined"
+                  style={{ margin: 8 }}
+                  className={classes.textField}
+                  required
                 />
               </FormControl>
-              <FormControl>
+              {/* <FormControl>
                 <TextField
                   id="currency"
                   select
@@ -232,6 +281,8 @@ export default function Variants() {
                   onChange={handleCurrency}
                   helperText="Please select your currency"
                   variant="outlined"
+                  style={{ margin: 8 }}
+                  className={classes.textField}
                 >
                   {currencies.map(option => (
                     <MenuItem key={option.value} value={option.value}>
@@ -239,7 +290,7 @@ export default function Variants() {
                     </MenuItem>
                   ))}
                 </TextField>
-              </FormControl>
+              </FormControl> */}
               {/* <FormControl>
                 <TextField
                   id="note"
@@ -263,7 +314,7 @@ export default function Variants() {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </Grid>
     </React.Fragment>
   )
 }
