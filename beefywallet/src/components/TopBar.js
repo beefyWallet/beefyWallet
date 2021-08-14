@@ -1,23 +1,23 @@
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import Badge from '@material-ui/core/Badge'
-import Brightness3Icon from '@material-ui/icons/Brightness3'
-import clsx from 'clsx'
-import React from 'react'
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import Badge from "@material-ui/core/Badge";
+import Brightness3Icon from "@material-ui/icons/Brightness3";
+import clsx from "clsx";
+import React from "react";
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const TopBar = ({ open, setOpen, classes }) => {
   // const [theme, setTheme] = React.useState('light')
   // const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`)
 
   const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   return (
     <Toolbar className={classes.toolbar}>
       <IconButton
@@ -39,7 +39,10 @@ const TopBar = ({ open, setOpen, classes }) => {
         Mr.Uknown
       </Typography>
       <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
+        {/* <Badge badgeContent={4} color="secondary">
+          <NotificationsIcon />
+        </Badge> */}
+        <Badge color="secondary">
           <NotificationsIcon />
         </Badge>
       </IconButton>
@@ -48,7 +51,7 @@ const TopBar = ({ open, setOpen, classes }) => {
         <Brightness3Icon />
       </IconButton>
     </Toolbar>
-  )
-}
+  );
+};
 
-export default TopBar
+export default TopBar;
