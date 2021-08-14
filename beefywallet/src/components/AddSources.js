@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import data from '../../data'
 import { TextField } from '@material-ui/core'
-
+import { Modal } from '@material-ui/core'
 const currencies = [
   {
     value: 'USD',
@@ -45,7 +45,10 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1),
       width: theme.spacing(20),
-      height: theme.spacing(12),
+      height: theme.spacing(10),
+    },
+    initiallyPadding: {
+      margin: theme.spacing(10),
     },
     button: {
       margin: theme.spacing(1),
@@ -60,6 +63,13 @@ const useStyles = makeStyles(theme => ({
       marginRight: 36,
       minWidth: 120,
     },
+    drawerPaper: {
+      background: 'blue',
+      padding: theme.spacing(2),
+      display: 'flex',
+      overflow: 'auto',
+      flexDirection: 'column',
+    },
   },
 }))
 
@@ -73,6 +83,7 @@ export default function Variants() {
   // const [transaction, setTransaction] = React.useState('')
   const [currency, setCurrency] = React.useState('')
   // const [note, setNote] = React.useState('')
+  const [addNewItem, setAddNewItem] = React.useState('')
 
   const handlerMoneySource = event => {
     setSource(event.target.value || '')
@@ -91,11 +102,22 @@ export default function Variants() {
   // const handlerNote = event => {
   //   setNote(event.target.value || '')
   // }
+
+  const handleAddnewSourceItemOpen = () => {
+    setAddNewItem(false)
+  }
+
+  const handleAddnewSourceItemClose = () => {
+    setAddNewItem(true)
+  }
+
   const handleClickOpen = () => {
     setOpen(true)
   }
-
   const handleClose = () => {
+    setOpen(false)
+  }
+  const handleCloseOk = () => {
     setOpen(false)
 
     const newSource = data2[0].money_sources.filter(item => item.name == source)
@@ -129,17 +151,19 @@ export default function Variants() {
 
   return (
     <React.Fragment>
-      {data2[0].money_sources.map(moneySource => (
-        <Grid key={moneySource.id} className={classes.root}>
-          <Paper elevation={3}>
-            <h3>{moneySource.name}</h3>
-            <h4>
-              {moneySource.amount}
-              {moneySource.currency}
-            </h4>
-          </Paper>
-        </Grid>
-      ))}
+      <Grid className={classes.root}>
+        {data2[0].money_sources.map(moneySource => (
+          <div key={moneySource.id}>
+            <Paper elevation={3} className={classes.drawerPaper}>
+              <h3>{moneySource.name}</h3>
+              <h4>
+                {moneySource.amount}
+                {moneySource.currency}
+              </h4>
+            </Paper>
+          </div>
+        ))}
+      </Grid>
 
       <div>
         <Button
@@ -165,7 +189,12 @@ export default function Variants() {
                   <MenuItem value="Closet">Closet</MenuItem>
                   <MenuItem value="Bank">Bank</MenuItem>
                   <MenuItem value="Backet">Backet</MenuItem>
-                  <MenuItem value="add_new_Source">Add New Source</MenuItem>
+                  <MenuItem
+                    value="add_new_Source"
+                    onClick={handleAddnewSourceItemOpen}
+                  >
+                    Add New Source
+                  </MenuItem>
                 </TextField>
               </FormControl>
 
@@ -229,7 +258,7 @@ export default function Variants() {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleCloseOk} color="primary">
               Ok
             </Button>
           </DialogActions>
