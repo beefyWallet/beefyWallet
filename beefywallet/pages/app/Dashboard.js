@@ -4,8 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Chart from '../../src/components/Chart'
 import Deposits from '../../src/components/Deposits'
-import Orders from '../../src/components/Orders'
-import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
+import Reports from '../../src/components/Reports'
 import React from 'react'
 import Variants from '../../src/components/AddSources'
 
@@ -40,7 +39,7 @@ export default function Dashboard() {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Orders />
+            <Reports />
           </Paper>
         </Grid>
       </Grid>

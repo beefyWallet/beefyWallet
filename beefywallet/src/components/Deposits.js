@@ -9,7 +9,7 @@ function preventDefault(event) {
 }
 
 const useStyles = makeStyles({
-  depositContext: {
+  totalContext: {
     flex: 1,
   },
 })
@@ -18,17 +18,20 @@ export default function Deposits() {
   const classes = useStyles()
   return (
     <React.Fragment>
-      {/* <Title>Recent Deposits</Title> */}
+      {/* <Title>Recent Total</Title> */}
       <Typography component="p" variant="h4">
-        $3,024.00
+        1,000 JOD
       </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+      <Typography color="textSecondary" className={classes.totalContext}>
+        on 2021
+      </Typography>
+      <Typography color="textSecondary" variant="h4">
+        Total
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        {/* <Link color="primary" href="#" onClick={preventDefault}>
           View balance
-        </Link>
+        </Link> */}
       </div>
     </React.Fragment>
   )
