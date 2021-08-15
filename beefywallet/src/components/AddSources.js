@@ -113,7 +113,11 @@ export default function Variants() {
   }
   const handleAddnewSourceItemCloseOk = () => {
     setAddNewItemOpen(false)
-    setDataMoneySource(prevDataMoney => [...prevDataMoney, addNewItemSource])
+
+    setDataMoneySource(prevDataMoney => [
+      ...prevDataMoney,
+      camelCase(addNewItemSource),
+    ])
   }
   const handleClickOpen = () => {
     setOpen(true)
@@ -132,11 +136,11 @@ export default function Variants() {
       if (!newSource.length) {
         const newSourceAdded = {
           id: (data2[0].money_sources.length + 1).toString(),
-          name: camelCase(source),
+          name: source,
           expenses: [],
           incomes: [],
           amount: amount,
-          currency: currency,
+          currency: 'JOD',
         }
         setData2(prevData2 => [
           ...prevData2,
