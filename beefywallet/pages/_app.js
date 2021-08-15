@@ -6,9 +6,15 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import HeadHtml from '../src/context/headHtml'
 import BeefyWalletAdmin from '../src/context/BeefyWalletAdmin'
+import SignIn from './app/login'
 
 export default function MyApp(props) {
+  const ISSERVER = typeof window === "undefined";
+  if(!ISSERVER) {
+  var token = localStorage.getItem("access_token")
+  }
   const { Component, pageProps } = props
+
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const theme = React.useMemo(
@@ -26,9 +32,16 @@ export default function MyApp(props) {
       <HeadHtml title={'Beefy Wallet'} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BeefyWalletAdmin>
-          <Component {...pageProps} />
-        </BeefyWalletAdmin>
+        
+        {token ? 
+                <BeefyWalletAdmin>
+                <Component {...pageProps} />
+              </BeefyWalletAdmin>
+              :
+               <SignIn/>}
+
+
+
       </ThemeProvider>
     </React.Fragment>
   )
