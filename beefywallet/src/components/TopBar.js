@@ -1,4 +1,3 @@
-import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -36,10 +35,11 @@ const TopBar = ({ open, setOpen, classes }) => {
         noWrap
         className={classes.title}
       >
-        Mr.Uknown
+        Mr.Unknown
       </Typography>
       <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
+        <Badge color="secondary">
+          {/* <Badge badgeContent={4} color="secondary"> */}
           <NotificationsIcon />
         </Badge>
       </IconButton>

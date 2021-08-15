@@ -6,7 +6,7 @@ import SideBar from '../components/SideBar'
 import TopBar from '../components/TopBar'
 import useStyles from '../../useStyle'
 
-export default function BeefyWalletHeaderAndSideBar({ children }) {
+export default function BeefyWalletTemplete({ children }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
 

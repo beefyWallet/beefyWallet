@@ -9,7 +9,7 @@ import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
 import React from 'react'
 import Variants from '../../src/components/AddSources'
 
-export default function DashboardPage() {
+export default function Dashboard() {
   const classes = useStyles()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
@@ -47,5 +47,3 @@ export default function DashboardPage() {
     </React.Fragment>
   )
 }
-
-DashboardPage.Layout = BeefyWalletAdmin

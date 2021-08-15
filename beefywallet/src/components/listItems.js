@@ -15,7 +15,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import Link from 'next/link'
 export const mainListItems = (
   <div>
-    <Link href={{ pathname: '/app' }}>
+    <Link href={{ pathname: '/' }}>
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
@@ -24,7 +24,7 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link href="/app/Advice">
+    <Link href="/Advice">
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
@@ -33,25 +33,25 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link href="/app/MoneySource">
+    {/* <Link href="/app/MoneySource">
       <ListItem button>
         <ListItemIcon>
           <AttachMoneyIcon />
         </ListItemIcon>
         <ListItemText primary="Money Source" />
       </ListItem>
-    </Link>
+    </Link> */}
 
-    <Link href="/app/Calender">
+    {/* <Link href="/app/Calender">
       <ListItem button>
         <ListItemIcon>
           <CalendarTodayIcon />
         </ListItemIcon>
         <ListItemText primary="Calender" />
       </ListItem>
-    </Link>
+    </Link> */}
 
-    <Link href="/app/Reports">
+    <Link href="/Reports">
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
@@ -60,7 +60,7 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link href="/app/Discount">
+    <Link href="/Discount">
       <ListItem button>
         <ListItemIcon>
           <LayersIcon />
@@ -73,7 +73,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    {/* <ListSubheader inset>Saved reports</ListSubheader> */}
     <ListItem button>
       <ListItemIcon>
         <AccountCircleIcon />

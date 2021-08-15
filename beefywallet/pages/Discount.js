@@ -1,8 +1,8 @@
-import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
+import BeefyWalletAdmin from '../src/context/BeefyWalletAdmin'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import clsx from 'clsx'
-import useStyles from '../../useStyle'
+import useStyles from '../useStyle'
 import React from 'react'
 
 export default function Discount() {

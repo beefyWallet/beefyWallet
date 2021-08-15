@@ -60,6 +60,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+function camelCase(word) {
+  return word[0].toUpperCase() + word.substring(1)
+}
 export default function Variants() {
   const classes = useStyles()
   const [data2, setData2] = React.useState(data)
@@ -118,16 +121,18 @@ export default function Variants() {
   const handleClose = () => {
     setOpen(false)
   }
+
   const handleCloseOk = () => {
     setOpen(false)
-    if (source != 'add_new_Source') {
+
+    if (source != 'add_new_Source' && source != '' && amount != '') {
       const newSource = data2[0].money_sources.filter(
         item => item.name == source
       )
-      if (newSource.length == 0) {
+      if (!newSource.length) {
         const newSourceAdded = {
           id: (data2[0].money_sources.length + 1).toString(),
-          name: source,
+          name: camelCase(source),
           expenses: [],
           incomes: [],
           amount: amount,
@@ -227,7 +232,6 @@ export default function Variants() {
                         onChange={addNewItemSourceHandler}
                         variant="outlined"
                         className={classes.textField}
-                        required
                       />
                     </FormControl>
                   </form>
@@ -269,7 +273,6 @@ export default function Variants() {
                   variant="outlined"
                   style={{ margin: 8 }}
                   className={classes.textField}
-                  required
                 />
               </FormControl>
               {/* <FormControl>

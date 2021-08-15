@@ -1,4 +1,6 @@
 import BeefyWalletAdmin from '../src/context/BeefyWalletAdmin'
+import Dashboard from './app/Dashboard'
 export default function Home() {
-  return <BeefyWalletAdmin />
+  return <Dashboard />
 }
+Home.Layout = BeefyWalletAdmin
