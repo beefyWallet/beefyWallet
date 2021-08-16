@@ -5,14 +5,22 @@ import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import Badge from '@material-ui/core/Badge'
 import Brightness3Icon from '@material-ui/icons/Brightness3'
+import WbSunnySharpIcon from '@material-ui/icons/WbSunnySharp'
+
 import clsx from 'clsx'
 import React from 'react'
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-
-const TopBar = ({ open, setOpen, classes }) => {
-  // const [theme, setTheme] = React.useState('light')
-  // const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`)
+const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
+  const [theme, setTheme] = React.useState(false)
+  const changeThemeHandler = () => {
+    if (theme) {
+      setThemeMode('light')
+      setTheme(false)
+    } else {
+      setThemeMode('Dark')
+      setTheme(true)
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -44,8 +52,8 @@ const TopBar = ({ open, setOpen, classes }) => {
         </Badge>
       </IconButton>
 
-      <IconButton color="inherit">
-        <Brightness3Icon />
+      <IconButton color="inherit" onClick={changeThemeHandler}>
+        {theme ? <Brightness3Icon /> : <WbSunnySharpIcon />}
       </IconButton>
     </Toolbar>
   )

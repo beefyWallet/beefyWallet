@@ -9,13 +9,14 @@ import BeefyWalletAdmin from '../src/context/BeefyWalletAdmin'
 import SignIn from './app/login'
 
 export default function MyApp(props) {
-  const ISSERVER = typeof window === "undefined";
-  if(!ISSERVER) {
-  var token = localStorage.getItem("access_token")
+  const ISSERVER = typeof window === 'undefined'
+  if (!ISSERVER) {
+    var token = localStorage.getItem('access_token')
   }
   const { Component, pageProps } = props
 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const [themeMode, setThemeMode] = React.useState('light')
+  const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${themeMode})`)
 
   const theme = React.useMemo(
     () =>
@@ -32,16 +33,14 @@ export default function MyApp(props) {
       <HeadHtml title={'Beefy Wallet'} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        
-        {token ? 
-                <BeefyWalletAdmin>
-                <Component {...pageProps} />
-              </BeefyWalletAdmin>
-              :
-               <SignIn/>}
 
-
-
+        {token ? (
+          <BeefyWalletAdmin setThemeMode={setThemeMode}>
+            <Component {...pageProps} />
+          </BeefyWalletAdmin>
+        ) : (
+          <SignIn />
+        )}
       </ThemeProvider>
     </React.Fragment>
   )

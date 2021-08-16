@@ -6,7 +6,7 @@ import SideBar from '../components/SideBar'
 import TopBar from '../components/TopBar'
 import useStyles from '../../useStyle'
 
-export default function BeefyWalletTemplete({ children }) {
+export default function BeefyWalletTemplete({ children, setThemeMode }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
 
@@ -17,7 +17,12 @@ export default function BeefyWalletTemplete({ children }) {
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
-        <TopBar setOpen={setOpen} open={open} classes={classes} />
+        <TopBar
+          setOpen={setOpen}
+          open={open}
+          classes={classes}
+          setThemeMode={setThemeMode}
+        />
       </AppBar>
 
       <SideBar setOpen={setOpen} open={open} classes={classes} />
