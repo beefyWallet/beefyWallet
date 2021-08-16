@@ -1,26 +1,35 @@
-import React from 'react'
-import Link from '@material-ui/core/Link'
-import { makeStyles } from '@material-ui/core/styles'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Title from './Title'
-import data from '../../data'
+import React from "react";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Title from "./Title";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 function preventDefault(event) {
-  event.preventDefault()
+  event.preventDefault();
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
-}))
+}));
 
-export default function Reports() {
-  const classes = useStyles()
+function getDate(date) {
+  const newDate = new Date(date);
+  return `${newDate.getFullYear()}-${
+    newDate.getMonth() + 1
+  }-${newDate.getDate()}`;
+}
+
+export default function Reports({ transactionsData }) {
+  console.log(transactionsData);
+  const classes = useStyles();
   return (
     <React.Fragment>
       <Title>Recent Reports</Title>
@@ -29,33 +38,29 @@ export default function Reports() {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Source</TableCell>
-            <TableCell>expenses</TableCell>
-            <TableCell>incomes</TableCell>
-            <TableCell align="right">Amount</TableCell>
+            <TableCell>Tranaction</TableCell>
+            <TableCell>Category</TableCell>
+            <TableCell>Amount</TableCell>
+            <TableCell>Note</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data[0].money_sources.map(row => (
+          {transactionsData.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>0000</TableCell>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{getDate(row.creation_date)}</TableCell>
+              <TableCell>{row.money_source.name}</TableCell>
               <TableCell>
-                {row.expenses.reduce(
-                  (sum, expense) => sum + parseInt(expense.value),
-                  0
+                {row.transaction_type == "Income" ? (
+                  <ArrowUpwardIcon color="primary" />
+                ) : (
+                  <ArrowDownwardIcon color="secondary" />
                 )}
-              </TableCell>
 
-              <TableCell>
-                {row.incomes.reduce(
-                  (sum, income) => sum + parseInt(income.value),
-                  0
-                )}
+                {row.transaction_type}
               </TableCell>
-              <TableCell align="right">
-                {row.amount}
-                {row.currency}
-              </TableCell>
+              <TableCell>{row.category}</TableCell>
+              <TableCell>{row.value} &nbsp; JOD</TableCell>
+              <TableCell>{row.note}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -66,5 +71,5 @@ export default function Reports() {
         </Link>
       </div>
     </React.Fragment>
-  )
+  );
 }

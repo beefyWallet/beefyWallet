@@ -70,9 +70,15 @@ export const mainListItems = (
     </Link>
   </div>
 )
+function SignOutHandler(event) {
+  localStorage.removeItem("refresh_token");
+  localStorage.removeItem("access_token");
+  location.reload();
 
+}
 export const secondaryListItems = (
   <div>
+ 
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
     <ListItem button>
       <ListItemIcon>
@@ -81,7 +87,7 @@ export const secondaryListItems = (
       <ListItemText primary="Account" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button onClick={SignOutHandler}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>
@@ -96,3 +102,4 @@ export const secondaryListItems = (
     </ListItem>
   </div>
 )
+

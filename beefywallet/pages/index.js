@@ -1,4 +1,4 @@
-import Dashboard from './app/Dashboard'
+import Dashboard from "./app/Dashboard";
 export default function Home() {
-  return <Dashboard />
+  return <Dashboard />;
 }
