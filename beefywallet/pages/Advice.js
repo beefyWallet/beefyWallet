@@ -1,42 +1,44 @@
 // import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardMedia from '@material-ui/core/CardMedia'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import { red } from '@material-ui/core/colors'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import data from '../data'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import data from '../data'
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
   avatar: {
     backgroundColor: red[500],
@@ -45,14 +47,36 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     height: 50,
   },
-}))
+}));
 
 export default function Advice() {
-  const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(false)
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [quotesData, setquotesData] = useState();
+  let quotesUrl =
+    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/quotes/";
 
+  const ISSERVER = typeof window === "undefined";
+  if (!ISSERVER) {
+    var token = localStorage.getItem("access_token");
+  }
+  useEffect(() => {
+    getApiData();
+  }, []);
+
+  async function getApiData() {
+    const config = { headers: { Authorization: "Bearer " + token } };
+    const quotesDataAPI = await axios.get(quotesUrl, config);
+    setquotesData(quotesDataAPI.data);
+    setLoading(false);
+  }
   const handleExpandClick = () => {
-    setExpanded(!expanded)
+    setExpanded(!expanded);
+  };
+
+  if (isLoading) {
+    return <div className={classes.loading}>Loading...</div>;
   }
 
   return (
@@ -64,31 +88,30 @@ export default function Advice() {
           </Paper>
         </Grid>
 
-        {data[0].money_sources.map(item => (
+        {quotesData.map((item) => (
           <Grid item xs={4} spacing={2}>
             <Card className={classes.root}>
               <CardHeader
                 avatar={
                   <Avatar aria-label="recipe" className={classes.avatar}>
-                    A
+                    {item.source[0]}
                   </Avatar>
                 }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title="Advice one"
-                subheader="August 14, 2021"
+                // action={
+                //   <IconButton aria-label="settings">
+                //     <MoreVertIcon />
+                //   </IconButton>
+                // }
+                title={item.source}
               />
               <CardMedia
                 className={classes.media}
-                image="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=635&q=80"
+                image={item.image}
                 title="Advice One"
               />
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  short discribtion for the Advice
+                  {item.quote}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
@@ -98,7 +121,7 @@ export default function Advice() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton> */}
-                <IconButton
+                {/* <IconButton
                   className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
                   })}
@@ -107,7 +130,7 @@ export default function Advice() {
                   aria-label="show more"
                 >
                   <ExpandMoreIcon />
-                </IconButton>
+                </IconButton> */}
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
@@ -119,6 +142,6 @@ export default function Advice() {
         ))}
       </Grid>
     </>
-  )
+  );
 }
 // Advice.Layout = BeefyWalletAdmin
