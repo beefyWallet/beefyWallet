@@ -1,6 +1,6 @@
 // import BeefyWalletAdmin from '../../src/context/BeefyWalletAdmin'
 import React, { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -21,6 +21,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
+import { ApiDataContext } from "../src/context/apiData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,28 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Advice() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [isLoading, setLoading] = useState(true);
-  const [quotesData, setquotesData] = useState();
-  let quotesUrl =
-    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/quotes/";
-
-  const ISSERVER = typeof window === "undefined";
-  if (!ISSERVER) {
-    var token = localStorage.getItem("access_token");
-  }
-  useEffect(() => {
-    getApiData();
-  }, []);
-
-  async function getApiData() {
-    const config = { headers: { Authorization: "Bearer " + token } };
-    const quotesDataAPI = await axios.get(quotesUrl, config);
-    setquotesData(quotesDataAPI.data);
-    setLoading(false);
-  }
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const { isLoading, quotesData } = useContext(ApiDataContext);
 
   if (isLoading) {
     return <div className={classes.loading}>Loading...</div>;

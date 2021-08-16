@@ -28,7 +28,6 @@ function getDate(date) {
 }
 
 export default function Reports({ transactionsData }) {
-  console.log(transactionsData);
   const classes = useStyles();
   return (
     <React.Fragment>
