@@ -97,12 +97,18 @@ export default function Advice() {
                 <Typography  variant="h5" gutterBottom>
                   {item.title}
                 </Typography>
-                <Typography color="textSecondary" variant="subtitle1" gutterBottom>
-                 time: {item.creation_date}
+                <Typography color="textSecondary" variant="subtitle2" gutterBottom>
+                      Time: {item.creation_date}
+
                 </Typography>
-            
-                  <Typography variant="body2" color="textSecondary" component="p">
-                  {item.text}
+   
+ 
+                  <Typography variant="body1" component="p">
+                      {item.text}
+                    </Typography>
+                    <Typography color="textSecondary" variant="subtitle2" gutterBottom>
+                      <br /> Type: {item.ad_type}
+                      <br /> Vendor: {item.vendor}
                 </Typography>
               </CardContent>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
