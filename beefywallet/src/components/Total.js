@@ -12,27 +12,25 @@ const useStyles = makeStyles({
   totalContext: {
     flex: 1,
   },
+  total: {
+    marginBottom: 15,
+  },
 });
 
-export default function Total() {
+export default function Total({ moneySourceData }) {
   const classes = useStyles();
   return (
     <React.Fragment>
       {/* <Title>Recent Total</Title> */}
+      <Typography color="textSecondary" variant="h4" className={classes.total}>
+        Total :
+      </Typography>
       <Typography component="p" variant="h4">
-        1,000 JOD
+        {moneySourceData.reduce((total, item) => {
+          return (total = total + item.amount);
+        }, 0)}{" "}
+        JOD
       </Typography>
-      <Typography color="textSecondary" className={classes.totalContext}>
-        on 2021
-      </Typography>
-      <Typography color="textSecondary" variant="h4">
-        Total
-      </Typography>
-      <div>
-        {/* <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link> */}
-      </div>
     </React.Fragment>
   );
 }

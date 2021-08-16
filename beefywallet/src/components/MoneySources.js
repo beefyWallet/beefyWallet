@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { useEffect } from "react";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   loading: {
@@ -59,44 +57,15 @@ function camelCase(word) {
 }
 
 // ###########################################
-export default function MoneySources() {
-  const [isLoading, setLoading] = useState(true);
-  let testData = [
-    {
-      id: 1,
-      name: "jjj",
-      amount: 200,
-    },
-  ];
-  const [data3, setData3] = useState();
-  let moneySourcesUrl =
-    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/money_sources/";
-
-  const ISSERVER = typeof window === "undefined";
-  if (!ISSERVER) {
-    var token = localStorage.getItem("access_token");
-  }
-  useEffect(() => {
-    getMoneySourceData();
-  }, []);
-
-  async function getMoneySourceData() {
-    const config = { headers: { Authorization: "Bearer " + token } };
-    const moneySourcesData = await axios.get(moneySourcesUrl, config);
-    setData3(moneySourcesData.data);
-    setLoading(false);
-  }
+export default function MoneySources({ moneySourceData }) {
   // console.log(data3);
   const classes = useStyles();
 
-  if (isLoading) {
-    return <div className={classes.loading}>Loading...</div>;
-  }
   return (
     <React.Fragment>
       <Grid container spacing={3} className={classes.initiallyTopMargin}>
         <div className={classes.root}>
-          {data3.map((moneySource) => (
+          {moneySourceData.map((moneySource) => (
             <Grid item key={moneySource.id} xs={5} md={2} lg={2}>
               <Paper className={classes.drawerPaper}>
                 <Typography component="p" variant="h6">
