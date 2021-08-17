@@ -60,6 +60,15 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
+    {/* <Link href="/Chart">
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Chart" />
+      </ListItem>
+    </Link> */}
+
     <Link href="/Discount">
       <ListItem button>
         <ListItemIcon>
@@ -71,14 +80,12 @@ export const mainListItems = (
   </div>
 )
 function SignOutHandler(event) {
-  localStorage.removeItem("refresh_token");
-  localStorage.removeItem("access_token");
-  location.reload();
-
+  localStorage.removeItem('refresh_token')
+  localStorage.removeItem('access_token')
+  location.reload()
 }
 export const secondaryListItems = (
   <div>
- 
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
     <ListItem button>
       <ListItemIcon>
@@ -102,4 +109,3 @@ export const secondaryListItems = (
     </ListItem>
   </div>
 )
-

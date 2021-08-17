@@ -1,66 +1,55 @@
-import React from "react";
-import { useTheme } from "@material-ui/core/styles";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  ResponsiveContainer,
-} from "recharts";
-import Title from "./Title";
-
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
+import React from 'react'
+import { Pie } from 'react-chartjs-2'
+import useStyles from '../../useStyle'
+const data = {
+  labels: ['Red', 'Blue', 'Yellow'],
+  datasets: [
+    {
+      data: [300, 50, 100],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+    },
+  ],
+}
+function randomColors(items) {
+  const colorslist = []
+  items.forEach(element => {
+    const random = Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .toUpperCase()
+    const color = `#${random}`
+    colorslist.push(color)
+  })
+  return colorslist
 }
 
-const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00", undefined),
-];
+export default function PieChart({ transactionsData }) {
+  console.log(transactionsData)
+  const categories = {}
+  transactionsData.map(item => {
+    categories[item.category]
+      ? (categories[item.category] += 1)
+      : (categories[item.category] = 1)
+  })
 
-export default function Chart() {
-  const theme = useTheme();
-
+  const colorsList = randomColors(Object.keys(categories))
+  const classes = useStyles()
   return (
-    <React.Fragment>
-      <Title>Total</Title>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
-            >
-              Income ($)
-            </Label>
-          </YAxis>
-          <Line
-            type="monotone"
-            dataKey="amount"
-            stroke={theme.palette.primary.main}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </React.Fragment>
-  );
+    <>
+      <Pie
+        data={{
+          labels: Object.keys(categories),
+          datasets: [
+            {
+              data: Object.values(categories),
+              backgroundColor: colorsList,
+              hoverBackgroundColor: colorsList,
+            },
+          ],
+        }}
+        width={10}
+        height={10}
+      />
+    </>
+  )
 }
