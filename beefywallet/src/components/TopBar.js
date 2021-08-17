@@ -1,4 +1,4 @@
-import AppBar from '@material-ui/core/AppBar'
+import React from 'react'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -6,17 +6,57 @@ import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import Badge from '@material-ui/core/Badge'
 import Brightness3Icon from '@material-ui/icons/Brightness3'
+import WbSunnySharpIcon from '@material-ui/icons/WbSunnySharp'
+import { useContext, useState } from 'react'
+import { ApiDataContext } from '../context/apiData'
+import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import NotificationMenuAds from './NotificationMenuAds'
+
 import clsx from 'clsx'
-import React from 'react'
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
+  const { isLoading, moneySourceData, quotesData } = useContext(ApiDataContext)
+  const [state, setState] = React.useState({
+    open1: false,
+    vertical: 'top',
+    horizontal: 'center',
+  })
 
-const TopBar = ({ open, setOpen, classes }) => {
-  // const [theme, setTheme] = React.useState('light')
-  // const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`)
+  const { vertical, horizontal, open1 } = state
+
+  const handleClick = newState => () => {
+    setState({ open1: true, ...newState })
+    // console.log("Clocked");
+  }
+
+  const handleClose = () => {
+    setState({ ...state, open1: false })
+  }
+  const [theme, setTheme] = React.useState(true)
+  const changeThemeHandler = () => {
+    if (theme) {
+      setThemeMode('light')
+      setTheme(false)
+    } else {
+      setThemeMode('Dark')
+      setTheme(true)
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true)
+  }
+  function randomNumber() {
+    if (!isLoading) {
+      // console.log(quotesData);
+      let quoteLength = quotesData.length
+      let min = 0
+      let max = Math.floor(quoteLength)
+      let rand = Math.floor(Math.random() * (max - min) + min)
+      // console.log(quotesData);
+      return quotesData[rand].quote
+    }
   }
   return (
     <Toolbar className={classes.toolbar}>
@@ -36,16 +76,34 @@ const TopBar = ({ open, setOpen, classes }) => {
         noWrap
         className={classes.title}
       >
-        Mr.Uknown
+        {isLoading
+          ? 'Getting your Data'
+          : 'Hi ' +
+            moneySourceData[0].author.username[0].toUpperCase() +
+            moneySourceData[0].author.username.slice(1)}
       </Typography>
+      <Button
+        onClick={handleClick({ vertical: 'bottom', horizontal: 'right' })}
+      >
+        Advice?
+      </Button>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open1}
+        onClose={handleClose}
+        message={isLoading ? null : randomNumber()}
+        key={vertical + horizontal}
+      />
       <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
-          <NotificationsIcon />
+        <Badge color="secondary">
+          {/* <Badge badgeContent={4} color="secondary"> */}
+          {/* <NotificationsIcon /> */}
+          <NotificationMenuAds />
         </Badge>
       </IconButton>
 
-      <IconButton color="inherit">
-        <Brightness3Icon />
+      <IconButton color="inherit" onClick={changeThemeHandler}>
+        {theme ? <Brightness3Icon /> : <WbSunnySharpIcon />}
       </IconButton>
     </Toolbar>
   )
