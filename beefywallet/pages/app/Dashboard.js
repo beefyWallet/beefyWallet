@@ -9,6 +9,10 @@ import React, { useContext } from "react";
 import MoneySources from "../../src/components/MoneySources";
 import { ApiDataContext } from "../../src/context/apiData";
 import AddTransactionForm from "../../src/components/AddTransactionForm";
+import ReportsDashboard from "../../src/components/ReportDashboard";
+import PieChart from "../../src/components/Chart";
+import MoneySourceChart from "../../src/components/MoneySourceChart";
+import { Typography } from "@material-ui/core";
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -31,13 +35,21 @@ export default function Dashboard() {
           <MoneySources moneySourceData={moneySourceData} />
         </Grid>
 
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
-            <Chart />
+        <Grid item xs={12} md={4} lg={4}>
+          <Paper className={classes.initiallyHeight}>
+            <Typography> Transactions Structure</Typography>
+            <PieChart />
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={4} lg={3}>
+        <Grid item xs={12} md={4} lg={4}>
+          <Paper className={classes.initiallyHeight}>
+            <Typography>Money Sources Structure</Typography>
+            <MoneySourceChart />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={12} md={4} lg={4}>
           <Paper className={fixedHeightPaper}>
             <Total moneySourceData={moneySourceData} />
           </Paper>
@@ -45,7 +57,7 @@ export default function Dashboard() {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Reports transactionsData={transactionsData} />
+            <ReportsDashboard transactionsData={transactionsData} />
           </Paper>
         </Grid>
 

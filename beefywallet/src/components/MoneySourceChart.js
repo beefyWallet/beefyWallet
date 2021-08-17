@@ -4,17 +4,18 @@ import { ApiDataContext } from "../../src/context/apiData";
 
 // defaults.global.tooltips.enabled = false;
 // defaults.global.legend.position = "bottom";
-defaults.animation = false;
-const BarChart = () => {
+
+const MoneySourceChart = () => {
   const { moneySourceData, transactionsData } = useContext(ApiDataContext);
   const categories = {};
   transactionsData.map((item) => {
     if (item.transaction_type == "Expenses") {
-      categories[item.category]
-        ? (categories[item.category] += item.value)
-        : (categories[item.category] = item.value);
+      categories[item.money_source.name]
+        ? (categories[item.money_source.name] += item.value)
+        : (categories[item.money_source.name] = item.value);
     }
   });
+  console.log(categories);
   return (
     <div>
       <Pie
@@ -84,60 +85,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
-
-// import React from "react";
-// import { Pie } from "react-chartjs-2";
-// import useStyles from "../../useStyle";
-// const data = {
-//   labels: ["Red", "Blue", "Yellow"],
-//   datasets: [
-//     {
-//       data: [300, 50, 100],
-//       backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-//       hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-//     },
-//   ],
-// };
-// function randomColors(items) {
-//   const colorslist = [];
-//   items.forEach((element) => {
-//     const random = Math.floor(Math.random() * 16777215)
-//       .toString(16)
-//       .toUpperCase();
-//     const color = `#${random}`;
-//     colorslist.push(color);
-//   });
-//   return colorslist;
-// }
-//
-// export default function PieChart({ transactionsData }) {
-//   console.log(transactionsData);
-//   const categories = {};
-//   transactionsData.map((item) => {
-//     categories[item.category]
-//       ? (categories[item.category] += 1)
-//       : (categories[item.category] = 1);
-//   });
-//
-//   const colorsList = randomColors(Object.keys(categories));
-//   const classes = useStyles();
-//   return (
-//     <>
-//       <Pie
-//         data={{
-//           labels: Object.keys(categories),
-//           datasets: [
-//             {
-//               data: Object.values(categories),
-//               backgroundColor: colorsList,
-//               hoverBackgroundColor: colorsList,
-//             },
-//           ],
-//         }}
-//         width={20}
-//         height={20}
-//       />
-//     </>
-//   );
-// }
+export default MoneySourceChart;
