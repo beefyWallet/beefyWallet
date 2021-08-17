@@ -76,8 +76,8 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
         noWrap
         className={classes.title}
       >
-        {isLoading && moneySourceData[0]
-          ? "Hi"
+        {isLoading && !moneySourceData
+          ? "Getting your Data"
           : "Hi " +
             moneySourceData[0].author.username[0].toUpperCase() +
             moneySourceData[0].author.username.slice(1)}

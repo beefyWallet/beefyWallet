@@ -29,31 +29,54 @@ export default function MyApp(props) {
       }),
     [prefersDarkMode]
   );
-  switch (Component.name) {
-    case "Home":
-      if (token) {
-        return (
-          <React.Fragment>
-            <HeadHtml title={"Beefy Wallet"} />
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <ApiDataContextProvider>
-                <BeefyWalletAdmin setThemeMode={setThemeMode}>
-                  <Component {...pageProps} />
-                </BeefyWalletAdmin>
-              </ApiDataContextProvider>
-            </ThemeProvider>
-          </React.Fragment>
-        );
-      } else {
-        return <Welcome />;
-      }
-    case "SignIn":
-      return <Component {...pageProps} />;
-    case "SignUp":
-      return <Component {...pageProps} />;
-    default:
-  }
+  return (
+    <React.Fragment>
+      <HeadHtml title={"Beefy Wallet"} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
+        {token ? (
+          <ApiDataContextProvider>
+            <BeefyWalletAdmin setThemeMode={setThemeMode}>
+              <Component {...pageProps} />
+            </BeefyWalletAdmin>
+          </ApiDataContextProvider>
+        ) : (
+          <SignIn />
+        )}
+      </ThemeProvider>
+    </React.Fragment>
+  );
+  // switch (Component.name) {
+  //   case "SignIn":
+  //     return (
+  //       <ThemeProvider theme={theme}>
+  //         <SignIn />
+  //       </ThemeProvider>
+  //     );
+  //   case "SignUp":
+  //     <ThemeProvider theme={theme}>
+  //       <SignUp />
+  //     </ThemeProvider>;
+  //   default:
+  //     return (
+  //       <React.Fragment>
+  //         <HeadHtml title={"Beefy Wallet"} />
+  //         <ThemeProvider theme={theme}>
+  //           <CssBaseline />
+  //           {token ? (
+  //             <ApiDataContextProvider>
+  //               <BeefyWalletAdmin setThemeMode={setThemeMode}>
+  //                 <Component {...pageProps} />
+  //               </BeefyWalletAdmin>
+  //             </ApiDataContextProvider>
+  //           ) : (
+  //             <Welcome />
+  //           )}
+  //         </ThemeProvider>
+  //       </React.Fragment>
+  //     );
+  // }
 }
 
 MyApp.propTypes = {

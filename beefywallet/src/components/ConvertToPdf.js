@@ -34,7 +34,7 @@ const PdfGemerator = () => {
   }
   const jspdfGenerator = () => {
     const doc = new jsPDF("landscape");
-    if (moneySourceData[0]) {
+    if (moneySourceData.length != 0) {
       doc.text(`Username: ${moneySourceData[0].author.username}`, 20, 25);
     }
 
