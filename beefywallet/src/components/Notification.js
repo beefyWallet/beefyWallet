@@ -31,6 +31,7 @@ import DoneAllIcon from '@material-ui/icons/DoneAll'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Link from 'next/link'
 
 const RootStyle = styled('div')({
   flexGrow: 1,
@@ -76,7 +77,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function getDate(checkDate) {}
+// function getDate(checkDate) {}
 export default function NotificationspopOver() {
   const { isLoading, adsData } = useContext(ApiDataContext)
   if (isLoading) {
@@ -115,6 +116,11 @@ export default function NotificationspopOver() {
       }))
     )
     setTotalUnRead(0)
+  }
+
+  const itemChosenHandler = () => {
+    setTotalUnRead(0)
+    setOpen(false)
   }
 
   return (
@@ -179,26 +185,18 @@ export default function NotificationspopOver() {
             <List>
               {adsData.map(item => (
                 <React.Fragment key={item.id}>
-                  {item.id === 1 && (
-                    <ListSubheader className={classes.subheader}>
-                      Today
-                    </ListSubheader>
-                  )}
-                  {item.id === 3 && (
-                    <ListSubheader className={classes.subheader}>
-                      Yesterday
-                    </ListSubheader>
-                  )}
-                  <ListItem button>
-                    <ListItemAvatar>
-                      <Avatar alt="Profile Picture" src={item.image} />
-                      {item.vendor}
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={item.ad_type}
-                      secondary={item.title}
-                    />
-                  </ListItem>
+                  <Link href="/Discount">
+                    <ListItem button onClick={itemChosenHandler}>
+                      <ListItemAvatar>
+                        <Avatar alt="Profile Picture" src={item.image} />
+                        {item.vendor}
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={item.ad_type}
+                        secondary={item.title}
+                      />
+                    </ListItem>
+                  </Link>
                 </React.Fragment>
               ))}
             </List>
