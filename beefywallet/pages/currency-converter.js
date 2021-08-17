@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import PdfGenerator from "../src/components/ConvertToPdf";
 
 const useStyles = makeStyles({
   totalContext: {
@@ -84,6 +85,9 @@ export default function CurrentConverter() {
                   fullWidth
                   color="primary"
                   onClick={handleSubmit}
+                  style={{
+                    marginTop: 10,
+                  }}
                 >
                   Convert
                 </Button>

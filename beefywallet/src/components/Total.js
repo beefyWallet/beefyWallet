@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { useContext, useState } from "react";
 import { ApiDataContext } from "../context/apiData";
+import PdfGemerator from "./ConvertToPdf";
 // import Title from './Title'
 
 function preventDefault(event) {
@@ -54,12 +55,13 @@ export default function Total() {
       <Typography color="textSecondary" variant="h4" className={classes.total}>
         Total :
       </Typography>
-      <Typography component="p" variant="h4">
+      <Typography className={classes.total} component="p" variant="h4">
         {moneySourceData.reduce((total, item) => {
           return (total = total + getAmount(item));
         }, 0)}
         JOD
       </Typography>
+      <PdfGemerator />
     </React.Fragment>
   );
 }
