@@ -36,11 +36,11 @@ export default function MyApp(props) {
         <CssBaseline />
 
         {token ? (
-          <BeefyWalletAdmin setThemeMode={setThemeMode}>
-            <ApiDataContextProvider>
+          <ApiDataContextProvider>
+            <BeefyWalletAdmin setThemeMode={setThemeMode}>
               <Component {...pageProps} />
-            </ApiDataContextProvider>
-          </BeefyWalletAdmin>
+            </BeefyWalletAdmin>
+          </ApiDataContextProvider>
         ) : (
           <SignIn />
         )}

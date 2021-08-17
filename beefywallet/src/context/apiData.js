@@ -1,6 +1,9 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import axiosInstance from "../../axios";
+import { darkmagenta } from "color-name";
 
 export const ApiDataContext = createContext();
 
@@ -10,6 +13,8 @@ const ApiDataContextProvider = (props) => {
   const [transactionsData, setTransactionsData] = useState();
   const [quotesData, setquotesData] = useState();
   const [adsData, setAdsData] = useState();
+  const [changeState, setChangeState] = useState();
+
   let adsUrl = "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/ads/";
 
   let moneySourcesUrl =
@@ -27,7 +32,7 @@ const ApiDataContextProvider = (props) => {
   }
   useEffect(() => {
     getApiData();
-  }, []);
+  }, [changeState]);
 
   async function getApiData() {
     const config = { headers: { Authorization: "Bearer " + token } };
@@ -43,6 +48,55 @@ const ApiDataContextProvider = (props) => {
     console.log(isLoading);
   }
 
+  const addMoneySource = (data) => {
+    const config = { headers: { Authorization: "Bearer " + token } };
+    axios
+      .post(
+        moneySourcesUrl,
+        {
+          name: data.name,
+          amount: data.amount,
+        },
+        config
+      )
+      .then((res) => {
+        setChangeState(uuidv4());
+      });
+  };
+
+  const addTransaction = (data) => {
+    const config = { headers: { Authorization: "Bearer " + token } };
+    try {
+      axios
+        .post(
+          transactionsUrl,
+          {
+            value: data.value,
+            transaction_type: data.transaction_type,
+            note: data.note,
+            category: data.category,
+            money_source: data.money_source,
+          },
+          config
+        )
+        .then(
+          (response) => {
+            console.log(response);
+            setChangeState(uuidv4());
+          },
+          (error) => {
+            console.log(error);
+            setChangeState(uuidv4());
+          }
+        );
+    } catch {
+      setChangeState(uuidv4());
+    }
+
+    // .then((res) => {
+    //   setChangeState(uuidv4());
+    // });
+  };
   return (
     <ApiDataContext.Provider
       value={{
@@ -51,6 +105,8 @@ const ApiDataContextProvider = (props) => {
         transactionsData,
         quotesData,
         adsData,
+        addMoneySource,
+        addTransaction,
       }}
     >
       {props.children}
