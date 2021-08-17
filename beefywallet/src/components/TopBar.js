@@ -6,6 +6,8 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import WbSunnySharpIcon from "@material-ui/icons/WbSunnySharp";
+import { useContext, useState } from "react";
+import { ApiDataContext } from "../context/apiData";
 
 import clsx from "clsx";
 import React from "react";
@@ -25,6 +27,7 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  const { isLoading, moneySourceData } = useContext(ApiDataContext);
   return (
     <Toolbar className={classes.toolbar}>
       <IconButton
@@ -43,7 +46,11 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
         noWrap
         className={classes.title}
       >
-        Mr.Unknown
+        {isLoading
+          ? "Getting your Data"
+          : "Hi " +
+            moneySourceData[0].author.username[0].toUpperCase() +
+            moneySourceData[0].author.username.slice(1)}
       </Typography>
       <IconButton color="inherit">
         <Badge color="secondary">

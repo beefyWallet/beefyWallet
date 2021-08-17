@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import HeadHtml from "../src/context/headHtml";
 import BeefyWalletAdmin from "../src/context/BeefyWalletAdmin";
 import SignIn from "./app/login";
+import ApiDataContextProvider from "../src/context/apiData";
 
 export default function MyApp(props) {
   const ISSERVER = typeof window === "undefined";
@@ -35,9 +36,11 @@ export default function MyApp(props) {
         <CssBaseline />
 
         {token ? (
-          <BeefyWalletAdmin setThemeMode={setThemeMode}>
-            <Component {...pageProps} />
-          </BeefyWalletAdmin>
+          <ApiDataContextProvider>
+            <BeefyWalletAdmin setThemeMode={setThemeMode}>
+              <Component {...pageProps} />
+            </BeefyWalletAdmin>
+          </ApiDataContextProvider>
         ) : (
           <SignIn />
         )}
