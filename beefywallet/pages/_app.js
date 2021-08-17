@@ -8,6 +8,7 @@ import HeadHtml from "../src/context/headHtml";
 import BeefyWalletAdmin from "../src/context/BeefyWalletAdmin";
 import SignIn from "./app/login";
 import ApiDataContextProvider from "../src/context/apiData";
+import Welcome from "./welcome";
 
 export default function MyApp(props) {
   const ISSERVER = typeof window === "undefined";
@@ -28,25 +29,31 @@ export default function MyApp(props) {
       }),
     [prefersDarkMode]
   );
-
-  return (
-    <React.Fragment>
-      <HeadHtml title={"Beefy Wallet"} />
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-
-        {token ? (
-          <ApiDataContextProvider>
-            <BeefyWalletAdmin setThemeMode={setThemeMode}>
-              <Component {...pageProps} />
-            </BeefyWalletAdmin>
-          </ApiDataContextProvider>
-        ) : (
-          <SignIn />
-        )}
-      </ThemeProvider>
-    </React.Fragment>
-  );
+  switch (Component.name) {
+    case "Home":
+      if (token) {
+        return (
+          <React.Fragment>
+            <HeadHtml title={"Beefy Wallet"} />
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <ApiDataContextProvider>
+                <BeefyWalletAdmin setThemeMode={setThemeMode}>
+                  <Component {...pageProps} />
+                </BeefyWalletAdmin>
+              </ApiDataContextProvider>
+            </ThemeProvider>
+          </React.Fragment>
+        );
+      } else {
+        return <Welcome />;
+      }
+    case "SignIn":
+      return <Component {...pageProps} />;
+    case "SignUp":
+      return <Component {...pageProps} />;
+    default:
+  }
 }
 
 MyApp.propTypes = {

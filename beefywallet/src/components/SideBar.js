@@ -1,15 +1,15 @@
-import Drawer from '@material-ui/core/Drawer'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import IconButton from '@material-ui/core/IconButton'
-import { mainListItems, secondaryListItems } from '../components/listItems'
-import clsx from 'clsx'
+import Drawer from "@material-ui/core/Drawer";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import IconButton from "@material-ui/core/IconButton";
+import { mainListItems, secondaryListItems } from "../components/listItems";
+import clsx from "clsx";
 
 const SideBar = ({ setOpen, open, classes }) => {
   const handleDrawerClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <Drawer
@@ -20,7 +20,13 @@ const SideBar = ({ setOpen, open, classes }) => {
       open={open}
     >
       <div className={classes.toolbarIcon}>
-        <h4>beefy</h4>
+        <img
+          src="/LogowithBg.png"
+          alt="Logo"
+          style={{ marginRight: 40, height: 60 }}
+        />
+
+        <h4>BeefyWallet</h4>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>
@@ -30,7 +36,7 @@ const SideBar = ({ setOpen, open, classes }) => {
       <Divider />
       <List>{secondaryListItems}</List>
     </Drawer>
-  )
-}
+  );
+};
 
-export default SideBar
+export default SideBar;
