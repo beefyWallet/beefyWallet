@@ -5,17 +5,14 @@ import useStyles from "../useStyle";
 import React from "react";
 // import PieChart from "../src/components/ChartPage";
 import ReportsComponent from "../src/components/ReportsComponent";
+import PageHeader from "../src/components/PageHeader";
 export default function Reports({ transactionsData }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <React.Fragment>
+      <PageHeader title="Reports" />
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.initiallyHeight}>
-            <h1 className="text-2xl">Reports</h1>
-          </Paper>
-        </Grid>
         <ReportsComponent transactionsData={transactionsData} />
       </Grid>
     </React.Fragment>

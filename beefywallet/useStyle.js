@@ -89,6 +89,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     // height: 50,
   },
+  pageHeader: {
+    marginTop: 20,
+    marginBottom: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
+  },
 }));
 
 export default useStyles;

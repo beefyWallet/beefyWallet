@@ -59,7 +59,7 @@ export default function Total() {
         {moneySourceData.reduce((total, item) => {
           return (total = total + getAmount(item));
         }, 0)}
-        JOD
+        &nbsp;JOD
       </Typography>
       <PdfGemerator />
     </React.Fragment>

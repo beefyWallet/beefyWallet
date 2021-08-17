@@ -14,6 +14,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import { fontSize } from "@material-ui/system";
+import PageHeader from "../src/components/PageHeader";
 
 const useStyles = makeStyles({
   card: {
@@ -32,19 +33,13 @@ export default function Help() {
 
   return (
     <React.Fragment>
-      <Paper style={{ padding: 10, marginBottom: 50 }}>
-        <h1 className="text-2xl">Help</h1>
-      </Paper>
-      <Paper style={{ width: 600, marginLeft: 200 }}>
-        <Typography style={{ padding: 10 }} variant="h6" gutterBottom>
+      {/* <PageHeader title="Help" /> */}
+      <Paper>
+        <Typography style={{ padding: 10 }} variant="h6">
           Contact Us
         </Typography>
-        <Grid
-          style={{ width: 500, marginLeft: 40, paddingBottom: 30 }}
-          container
-          spacing={3}
-        >
-          <Grid item xs={12} sm={6}>
+        <Grid style={{ padding: 30 }} container spacing={3}>
+          <Grid item xs={6} sm={6}>
             <TextField
               required
               id="firstName"
@@ -54,7 +49,7 @@ export default function Help() {
               autoComplete="given-name"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={6}>
             <TextField
               required
               id="lastName"
@@ -89,7 +84,7 @@ export default function Help() {
           <Grid item xs={12} sm={6}>
             <Button
               style={{ marginTop: 15, marginLeft: 80 }}
-              variant="outlined"
+              variant="contained"
               color="primary"
             >
               Send Question
@@ -99,7 +94,7 @@ export default function Help() {
       </Paper>
       <Paper style={{ width: 300, marginTop: 70 }}>
         <h3 style={{ marginTop: 50, padding: 10, fontSize: 20 }}>
-          Most Frequently Questions
+          Most Frequent Questions
         </h3>
       </Paper>
       <Grid style={{ marginTop: 20 }} container spacing={2}>
@@ -112,7 +107,7 @@ export default function Help() {
                   component="h2"
                   variant="h5"
                 >
-                  How I can stop spending ?
+                  How can I stop spending ?
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   by: Ali Samer
@@ -127,7 +122,7 @@ export default function Help() {
                       fontWeight: "bold",
                       textDecoration: "underline",
                     }}
-                    href="/Advice"
+                    href="/quotes"
                   >
                     Advice
                   </a>{" "}
@@ -154,7 +149,7 @@ export default function Help() {
                   component="h2"
                   variant="h5"
                 >
-                  How I get the report ?
+                  How I get the a report contains all my data ?
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   by: Maram Aysar
@@ -169,7 +164,7 @@ export default function Help() {
                       fontWeight: "bold",
                       textDecoration: "underline",
                     }}
-                    href="/Report"
+                    href="/reports"
                   >
                     Report
                   </a>{" "}
