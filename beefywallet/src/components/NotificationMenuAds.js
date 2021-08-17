@@ -1,27 +1,18 @@
 import React, { useContext } from 'react'
-import { ApiDataContext } from '../../src/context/apiData'
-import { withStyles, makeStyles } from '@material-ui/core/styles'
+import { ApiDataContext } from '../context/apiData'
+import { makeStyles } from '@material-ui/core/styles'
 import {
-  Button,
   IconButton,
   Badge,
   Tooltip,
   Divider,
   Box,
   List,
-  ListSubheader,
-  ListItemButton,
   ListItemAvatar,
   Avatar,
   ListItem,
 } from '@material-ui/core'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import DraftsIcon from '@material-ui/icons/Drafts'
-import SendIcon from '@material-ui/icons/Send'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import { alpha, styled } from '@material-ui/core/styles'
 import Popover from '@material-ui/core/Popover'
@@ -33,17 +24,11 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Link from 'next/link'
 
-const RootStyle = styled('div')({
-  flexGrow: 1,
-  height: '10',
-  overflow: 'hidden',
-})
-
 const useStyles = makeStyles(theme => ({
   root: {
-    height: 10,
-    width: 20,
-    margin: 50,
+    height: 1000,
+    minWidth: 275,
+    marginTop: 5,
   },
   text: {
     padding: theme.spacing(2, 2, 0),
@@ -78,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 // function getDate(checkDate) {}
-export default function NotificationspopOver() {
+export default function NotificationMenuAds() {
   const { isLoading, adsData } = useContext(ApiDataContext)
   if (isLoading) {
     return (
@@ -88,7 +73,6 @@ export default function NotificationspopOver() {
       </div>
     )
   }
-  console.log(adsData)
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   // const anchorRef = React.useRef(null)
@@ -159,6 +143,7 @@ export default function NotificationspopOver() {
           vertical: 'top',
           horizontal: 'center',
         }}
+        className={classes.root}
       >
         <CssBaseline />
         <Container maxWidth="sm">

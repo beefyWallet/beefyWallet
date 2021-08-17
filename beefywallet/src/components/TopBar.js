@@ -6,7 +6,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import Badge from '@material-ui/core/Badge'
 import Brightness3Icon from '@material-ui/icons/Brightness3'
 import WbSunnySharpIcon from '@material-ui/icons/WbSunnySharp'
-import NotificationspopOver from './Notification'
+import NotificationMenuAds from './NotificationMenuAds'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -49,7 +49,7 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
         <Badge color="secondary">
           {/* <Badge badgeContent={4} color="secondary"> */}
           {/* <NotificationsIcon /> */}
-          <NotificationspopOver />
+          <NotificationMenuAds />
         </Badge>
       </IconButton>
 
