@@ -1,10 +1,11 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, responsiveFontSizes } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
+import Grid from '@material-ui/core/Grid';
 
 function Copyright() {
   return (
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     minHeight: "100vh",
+    
   },
   main: {
     marginTop: theme.spacing(8),
@@ -37,6 +39,30 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.grey[200]
         : theme.palette.grey[800],
   },
+  marginLeft: {
+    marginLeft: 200,
+  },
+  typo: {
+    background: theme.background,
+    border: 0,
+    fontSize: 16,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px #3c5186',
+    color: 'white',
+    height: 30,
+    width: 300,
+    padding: '0 20px',
+    marginTop: 20
+
+  },
+  colors: {
+    color:'gray'
+  },
+  logo: {
+    width:400,
+    height:400,
+    marginTop: 50
+  }
 }));
 
 export default function Welcome() {
@@ -44,17 +70,22 @@ export default function Welcome() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      <Grid container spacing={0} >
+        <Grid item xs={4} className={classes.marginLeft}>
       <Container component="main" className={classes.main} maxWidth="sm">
-        <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to <br />{" "}
-          <span style={{ color: "#3c5186" }}> Beefy Wallet</span>
-          <img src="/LogowithBg.png" alt="Logo" />
+        <Typography variant="h2" component="h2" gutterBottom>
+          Welcome to <br />
+              <span style={{ color: "#3c5186" }}>Beefy Wallet </span>
+        <Typography variant="h2" component="h2"  gutterBottom>              
+        Control Your Habits
         </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {"Short discribtion about Beefy"}
+                
         </Typography>
-        <Typography variant="body1">Be part of us</Typography>
+        <Typography variant="body1" component="p" className={classes.colors} gutterBottom>
+          {"with BeefyWallet you can track your money sources and analyze your spending habits."}
+          {"and we will suggest advice for you and offers to have better experince with us"}
+        </Typography>
+        <Typography  className={classes.typo} variant="subtitle1" >Join Now And Be More Controler</Typography>
         <br />
 
         <Button variant="outlined" color="primary">
@@ -71,13 +102,19 @@ export default function Welcome() {
             Sign-Up
           </Link>
         </Button>
-      </Container>
+          </Container>
+        </Grid>
+        <Grid item xs={4}>
+          <img src="/LogowithBg.png" alt="Logo" className={classes.logo}  />
+        </Grid>
+        </Grid>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1">BeefyWallet is Awesome</Typography>
+          <Typography  variant="body1">BeefyWallet is Awesome</Typography>
           <Copyright />
         </Container>
       </footer>
     </div>
   );
 }
+

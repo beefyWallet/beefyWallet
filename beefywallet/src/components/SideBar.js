@@ -20,7 +20,9 @@ const SideBar = ({ setOpen, open, classes }) => {
       open={open}
     >
       <div className={classes.toolbarIcon}>
-        <h4>beefy</h4>
+      <img src="/LogowithBg.png" alt="Logo" style={{marginRight:40,height:60}} />
+
+        <h4>BeefyWallet</h4>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>
