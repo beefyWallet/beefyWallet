@@ -85,8 +85,9 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
   initiallyHeight: {
-    padding: theme.spacing(2),
-    height: 50,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    // height: 50,
   },
 }));
 
