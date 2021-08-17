@@ -5,8 +5,25 @@ import List from '@material-ui/core/List'
 import IconButton from '@material-ui/core/IconButton'
 import { mainListItems, secondaryListItems } from '../components/listItems'
 import clsx from 'clsx'
+import Avatar from '@material-ui/core/Avatar'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: theme.spacing(10),
+  },
+}))
 
 const SideBar = ({ setOpen, open, classes }) => {
+  const classesAvatar = useStyles()
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -20,7 +37,13 @@ const SideBar = ({ setOpen, open, classes }) => {
       open={open}
     >
       <div className={classes.toolbarIcon}>
-        <h4>beefy</h4>
+        <div className={classes.classesAvatar}>
+          <Avatar
+            alt="Remy Sharp"
+            src="https://www.pngkey.com/png/detail/114-1149847_avatar-unknown-dp.png"
+            className={classesAvatar.large}
+          />
+        </div>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>
