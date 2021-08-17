@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(10),
     },
   },
+  form: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
   initiallyTopMargin: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(3),
@@ -33,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   formControl: {
     margin: theme.spacing(2),
@@ -59,11 +64,41 @@ function camelCase(word) {
 }
 
 // ###########################################
-export default function MoneySources({ moneySourceData }) {
+export default function MoneySources() {
   const classes = useStyles();
   const [formData, updateFormData] = useState(initialFormData);
-  const { addMoneySource } = useContext(ApiDataContext);
-
+  const {
+    addMoneySource,
+    transactionsData,
+    moneySourceData,
+    DeleteMoneySource,
+  } = useContext(ApiDataContext);
+  const deleteHandler = (e) => {
+    DeleteMoneySource(e.currentTarget.id);
+  };
+  function getAmount(moneySource) {
+    let expenesTotal = transactionsData.reduce((total, item) => {
+      if (
+        item.transaction_type == "Expenses" &&
+        item.money_source.name == moneySource.name
+      ) {
+        return (total = total + Number(item.value));
+      } else {
+        return total;
+      }
+    }, 0);
+    let IncomesTotal = transactionsData.reduce((total, item) => {
+      if (
+        item.transaction_type == "Incomes" &&
+        item.money_source.name == moneySource.name
+      ) {
+        return (total = total + Number(item.value));
+      } else {
+        return total;
+      }
+    }, 0);
+    return moneySource.amount - expenesTotal + IncomesTotal;
+  }
   const initialFormData = Object.freeze({
     amount: 0,
     name: "",
@@ -83,46 +118,74 @@ export default function MoneySources({ moneySourceData }) {
 
   return (
     <React.Fragment>
-      <Grid container spacing={3} className={classes.initiallyTopMargin}>
-        <div className={classes.root}>
-          {moneySourceData.map((moneySource) => (
-            <Grid item key={moneySource.id} xs={5} md={2} lg={2}>
-              <Paper className={classes.drawerPaper}>
-                <Typography component="p" variant="h6">
-                  {moneySource.name}
-                </Typography>
-                <Typography color="textSecondary">
-                  {moneySource.amount} JOD
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </div>
-        <form className={classes.root} noValidate autoComplete="off">
-          <TextField
-            id="amount"
-            label="Amount"
-            variant="outlined"
-            name="amount"
-            onChange={handleChange}
-          />
-          <TextField
-            id="name"
-            label="Name"
-            variant="outlined"
-            name="name"
-            onChange={handleChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
+      <Grid container>
+        <Grid item md={9}>
+          <Grid container spacing={3} className={classes.initiallyTopMargin}>
+            <div className={classes.root}>
+              {moneySourceData.map((moneySource) => (
+                <Grid item key={moneySource.id} xs={5} md={3} lg={3}>
+                  <Paper className={classes.drawerPaper}>
+                    <div className={classes.container}>
+                      <Typography component="p" variant="h6">
+                        {moneySource.name}
+                      </Typography>
+                      <Button
+                        color="secondary"
+                        // name={moneySource.id}
+                        id={moneySource.id}
+                        onClick={deleteHandler}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                    <Typography color="textSecondary">
+                      {getAmount(moneySource)} JOD
+                    </Typography>
+                  </Paper>
+                </Grid>
+              ))}
+            </div>
+          </Grid>
+        </Grid>
+        <Grid item md={3}>
+          <form
+            className={classes.initiallyTopMargin}
+            noValidate
+            autoComplete="off"
           >
-            Post
-          </Button>
-        </form>
+            <Grid container>
+              <Grid item md={12}>
+                <TextField
+                  id="amount"
+                  label="Amount"
+                  variant="outlined"
+                  name="amount"
+                  fullWidth
+                  onChange={handleChange}
+                />
+                <TextField
+                  id="name"
+                  label="Name"
+                  variant="outlined"
+                  name="name"
+                  fullWidth
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item md={12}>
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  fullWidth
+                  color="primary"
+                  onClick={handleSubmit}
+                >
+                  Add Source
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Grid>
       </Grid>
     </React.Fragment>
   );

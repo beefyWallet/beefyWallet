@@ -8,6 +8,8 @@ import Reports from "../../src/components/Reports";
 import React, { useContext } from "react";
 import MoneySources from "../../src/components/MoneySources";
 import { ApiDataContext } from "../../src/context/apiData";
+import AddTransactionForm from "../../src/components/AddTransactionForm";
+
 export default function Dashboard() {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -45,6 +47,10 @@ export default function Dashboard() {
           <Paper className={classes.paper}>
             <Reports transactionsData={transactionsData} />
           </Paper>
+        </Grid>
+
+        <Grid item xs={12}>
+          <AddTransactionForm transactionsData={transactionsData} />
         </Grid>
       </Grid>
     </React.Fragment>
