@@ -2,6 +2,8 @@ import React from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { useContext, useState } from "react";
+import { ApiDataContext } from "../context/apiData";
 // import Title from './Title'
 
 function preventDefault(event) {
@@ -17,7 +19,34 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Total({ moneySourceData }) {
+export default function Total() {
+  const { transactionsData, moneySourceData } = useContext(ApiDataContext);
+
+  function getAmount(moneySource) {
+    let expenesTotal = transactionsData.reduce((total, item) => {
+      if (
+        item.transaction_type == "Expenses" &&
+        item.money_source.name == moneySource.name
+      ) {
+        return (total = total + Number(item.value));
+      } else {
+        return total;
+      }
+    }, 0);
+    let IncomesTotal = transactionsData.reduce((total, item) => {
+      if (
+        item.transaction_type == "Incomes" &&
+        item.money_source.name == moneySource.name
+      ) {
+        return (total = total + Number(item.value));
+      } else {
+        return total;
+      }
+    }, 0);
+    // console.log(expenesTotal);
+    // console.log(IncomesTotal);
+    return moneySource.amount - expenesTotal + IncomesTotal;
+  }
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -27,8 +56,8 @@ export default function Total({ moneySourceData }) {
       </Typography>
       <Typography component="p" variant="h4">
         {moneySourceData.reduce((total, item) => {
-          return (total = total + item.amount);
-        }, 0)}{" "}
+          return (total = total + getAmount(item));
+        }, 0)}
         JOD
       </Typography>
     </React.Fragment>

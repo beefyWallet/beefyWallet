@@ -45,7 +45,7 @@ const ApiDataContextProvider = (props) => {
     const adsDataAPI = await axios.get(adsUrl, config);
     setAdsData(adsDataAPI.data);
     setLoading(false);
-    console.log(isLoading);
+    // console.log(isLoading);
   }
 
   const addMoneySource = (data) => {
@@ -92,10 +92,36 @@ const ApiDataContextProvider = (props) => {
     } catch {
       setChangeState(uuidv4());
     }
-
-    // .then((res) => {
-    //   setChangeState(uuidv4());
-    // });
+  };
+  const DeleteTransaction = (data) => {
+    let url = transactionsUrl + data + "/";
+    console.log(url);
+    const config = { headers: { Authorization: "Bearer " + token } };
+    axios
+      .delete(url, config)
+      .then((response) => {
+        console.log(response);
+        setChangeState(uuidv4());
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setChangeState(uuidv4());
+      });
+  };
+  const DeleteMoneySource = (data) => {
+    let url = moneySourcesUrl + data + "/";
+    console.log(url);
+    const config = { headers: { Authorization: "Bearer " + token } };
+    axios
+      .delete(url, config)
+      .then((response) => {
+        console.log(response);
+        setChangeState(uuidv4());
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setChangeState(uuidv4());
+      });
   };
   return (
     <ApiDataContext.Provider
@@ -107,6 +133,8 @@ const ApiDataContextProvider = (props) => {
         adsData,
         addMoneySource,
         addTransaction,
+        DeleteTransaction,
+        DeleteMoneySource,
       }}
     >
       {props.children}
