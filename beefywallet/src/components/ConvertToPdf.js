@@ -34,8 +34,10 @@ const PdfGemerator = () => {
   }
   const jspdfGenerator = () => {
     const doc = new jsPDF("landscape");
+    if (moneySourceData[0]) {
+      doc.text(`Username: ${moneySourceData[0].author.username}`, 20, 25);
+    }
 
-    doc.text(`Username: ${moneySourceData[0].author.username}`, 20, 25);
     doc.setFont("helvetica", "bold");
     doc.text(`Beefy Wallet Report`, 125, 50);
     doc.setFontSize(12);
