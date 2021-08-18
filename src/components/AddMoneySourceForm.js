@@ -109,7 +109,7 @@ export default function AddMoneySourceForm() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Transaction</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add New Source</DialogTitle>
         <DialogContent>
           <form
             className={classes.initiallyTopMargin}
@@ -128,7 +128,7 @@ export default function AddMoneySourceForm() {
                 />
                 <TextField
                   id="name"
-                  label="Name"
+                  label="Source"
                   variant="outlined"
                   name="name"
                   fullWidth

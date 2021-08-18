@@ -43,7 +43,7 @@ export default function MyApp(props) {
       }),
     [prefersDarkMode]
   );
-
+  console.log(Component.name);
   if (Component.name == "SignIn") {
     return (
       <ThemeProvider theme={theme}>

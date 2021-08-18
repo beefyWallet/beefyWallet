@@ -115,7 +115,7 @@ export default function AddTransactionForm({}) {
               <Grid item xs={3} lg={6}>
                 <FormControl fullWidth className={classes.formControl}>
                   <TextField
-                    label="transaction_type"
+                    label="Transaction Type"
                     select
                     id="transaction_type"
                     // value={transaction}
@@ -132,7 +132,7 @@ export default function AddTransactionForm({}) {
                 <TextField
                   id="note"
                   fullWidth
-                  label="note"
+                  label="Note"
                   variant="outlined"
                   name="note"
                   onChange={handleChange}
@@ -142,7 +142,7 @@ export default function AddTransactionForm({}) {
               <Grid item lg={6}>
                 <FormControl fullWidth className={classes.formControl}>
                   <TextField
-                    label="category"
+                    label="Category"
                     select
                     id="category"
                     name="category"
@@ -158,7 +158,7 @@ export default function AddTransactionForm({}) {
               <Grid item lg={6}>
                 <FormControl fullWidth className={classes.formControl}>
                   <TextField
-                    label="money_source"
+                    label="Money Source"
                     select
                     id="money_source"
                     name="money_source"
