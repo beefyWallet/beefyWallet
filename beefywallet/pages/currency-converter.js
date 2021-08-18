@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import PageHeader from '../src/components/PageHeader'
 import SyncAltIcon from '@material-ui/icons/SyncAlt'
+import clsx from 'clsx'
 const useStyles = makeStyles(theme => ({
   totalContext: {
     flex: 1,
@@ -25,6 +26,13 @@ const useStyles = makeStyles(theme => ({
   },
   marginleft: {
     marginLeft: theme.spacing(5),
+  },
+  icon: {
+    marginLeft: theme.spacing(5),
+    marginTop: theme.spacing(1),
+  },
+  width: {
+    width: theme.spacing(43),
   },
 }))
 
@@ -69,21 +77,22 @@ export default function CurrentConverter() {
               />
               <TextField
                 id="first"
-                label="Currency"
+                label="Currency 1"
                 helperText="USD EUR JPY GBP AUD JOD ..."
                 variant="outlined"
                 name="first"
                 // fullWidth
+                className={classes.width}
                 onChange={e => setFirst(e.target.value.toUpperCase())}
               />
-              <SyncAltIcon className={classes.marginleft} />
+              <SyncAltIcon style={{ fontSize: 40 }} className={classes.icon} />
               <TextField
                 id="second"
-                label="Currency"
+                label="Currency 2"
                 helperText="USD EUR JPY GBP AUD JOD ..."
                 variant="outlined"
                 name="second"
-                className={classes.marginleft}
+                className={clsx(classes.marginleft, classes.width)}
                 // fullWidth
                 onChange={e => setSecond(e.target.value)}
               />
