@@ -11,11 +11,15 @@ import SignUp from "./app/signup";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeadHtml from "../src/context/headHtml";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 const BeefyWalletAdminn = dynamic(
   () => import("../src/context/BeefyWalletAdmin"),
   { ssr: false }
 );
 export default function MyApp(props) {
+  const router = useRouter();
+  console.log(router.pathname);
+
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -43,15 +47,14 @@ export default function MyApp(props) {
       }),
     [prefersDarkMode]
   );
-  console.log(Component.name);
-  if (Component.name == "SignIn") {
+  if (router.pathname == "/app/signin") {
     return (
       <ThemeProvider theme={theme}>
         <SignIn />
       </ThemeProvider>
     );
   }
-  if (Component.name == "SignUp") {
+  if (router.pathname == "/app/signup") {
     return (
       <ThemeProvider theme={theme}>
         <SignUp />

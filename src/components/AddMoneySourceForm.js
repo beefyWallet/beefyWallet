@@ -119,18 +119,18 @@ export default function AddMoneySourceForm() {
             <Grid container>
               <Grid item md={12}>
                 <TextField
-                  id="amount"
-                  label="Amount"
-                  variant="outlined"
-                  name="amount"
-                  fullWidth
-                  onChange={handleChange}
-                />
-                <TextField
                   id="name"
                   label="Source"
                   variant="outlined"
                   name="name"
+                  fullWidth
+                  onChange={handleChange}
+                />
+                <TextField
+                  id="amount"
+                  label="Amount"
+                  variant="outlined"
+                  name="amount"
                   fullWidth
                   onChange={handleChange}
                 />

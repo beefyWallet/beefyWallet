@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { ApiDataContext } from '../context/apiData'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useContext } from "react";
+import { ApiDataContext } from "../context/apiData";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
   Badge,
@@ -11,20 +11,20 @@ import {
   ListItemAvatar,
   Avatar,
   ListItem,
-} from '@material-ui/core'
-import ListItemText from '@material-ui/core/ListItemText'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import { alpha, styled } from '@material-ui/core/styles'
-import Popover from '@material-ui/core/Popover'
-import Typography from '@material-ui/core/Typography'
-import PropTypes from 'prop-types'
-import DoneAllIcon from '@material-ui/icons/DoneAll'
-import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Link from 'next/link'
+} from "@material-ui/core";
+import ListItemText from "@material-ui/core/ListItemText";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import { alpha, styled } from "@material-ui/core/styles";
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
+import DoneAllIcon from "@material-ui/icons/DoneAll";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from "next/link";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: 1000,
     minWidth: 275,
@@ -43,69 +43,69 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   appBar: {
-    top: 'auto',
+    top: "auto",
     bottom: 0,
   },
   grow: {
     flexGrow: 1,
   },
   fabButton: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     top: -30,
     left: 0,
     right: 0,
-    margin: '0 auto',
+    margin: "0 auto",
   },
   typography: {
     padding: theme.spacing(2),
   },
-}))
+}));
 
 // function getDate(checkDate) {}
 export default function NotificationMenuAds() {
-  const { isLoading, adsData } = useContext(ApiDataContext)
+  const { isLoading, adsData } = useContext(ApiDataContext);
   if (isLoading) {
     return (
       <div>
-        {' '}
+        {" "}
         <CircularProgress color="secondary" />
       </div>
-    )
+    );
   }
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
   // const anchorRef = React.useRef(null)
-  const [open, setOpen] = React.useState(false)
-  const [notifications, setNotifications] = React.useState(adsData)
+  const [open, setOpen] = React.useState(false);
+  const [notifications, setNotifications] = React.useState(adsData);
   const [totalUnRead, setTotalUnRead] = React.useState(
-    notifications.filter(item => item.read === false).length
-  )
+    notifications.filter((item) => item.read === false).length
+  );
 
-  const handleOpen = event => {
-    setAnchorEl(event.currentTarget)
-    setOpen(true)
-  }
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-    setAnchorEl(null)
-  }
+    setOpen(false);
+    setAnchorEl(null);
+  };
 
   const handleMarkAllAsRead = () => {
     setNotifications(
-      notifications.map(notification => ({
+      notifications.map((notification) => ({
         ...notification,
         read: true,
       }))
-    )
-    setTotalUnRead(0)
-  }
+    );
+    setTotalUnRead(0);
+  };
 
   const itemChosenHandler = () => {
-    setTotalUnRead(0)
-    setOpen(false)
-  }
+    setTotalUnRead(0);
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -114,11 +114,11 @@ export default function NotificationMenuAds() {
         aria-haspopup="true"
         variant="contained"
         size="large"
-        color={open ? 'secondary' : ''}
+        color={open ? "secondary" : ""}
         onClick={handleOpen}
         sx={{
           ...(open && {
-            bgcolor: theme =>
+            bgcolor: (theme) =>
               alpha(
                 theme.palette.primary.main,
                 theme.palette.action.focusOpacity
@@ -136,21 +136,21 @@ export default function NotificationMenuAds() {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
         className={classes.root}
       >
         <CssBaseline />
         <Container maxWidth="sm">
-          <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
+          <Box sx={{ display: "flex", alignItems: "center", py: 2, px: 2.5 }}>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="subtitle1">Notifications</Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 You have {totalUnRead} unread messages
               </Typography>
             </Box>
@@ -168,9 +168,9 @@ export default function NotificationMenuAds() {
 
           <Box>
             <List>
-              {adsData.map(item => (
+              {adsData.map((item) => (
                 <React.Fragment key={item.id}>
-                  <Link href="/Discount">
+                  <Link href="/discounts">
                     <ListItem button onClick={itemChosenHandler}>
                       <ListItemAvatar>
                         <Avatar alt="Profile Picture" src={item.image} />
@@ -189,5 +189,5 @@ export default function NotificationMenuAds() {
         </Container>
       </Popover>
     </div>
-  )
+  );
 }
