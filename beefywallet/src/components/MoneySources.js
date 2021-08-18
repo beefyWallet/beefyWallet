@@ -120,32 +120,38 @@ export default function MoneySources() {
     <React.Fragment>
       <Grid container>
         <Grid item md={9}>
-          <Grid container spacing={3} className={classes.initiallyTopMargin}>
-            <div className={classes.root}>
-              {moneySourceData.map((moneySource) => (
-                <Grid item key={moneySource.id} xs={5} md={3} lg={3}>
-                  <Paper className={classes.drawerPaper}>
-                    <div className={classes.container}>
-                      <Typography component="p" variant="h6">
-                        {moneySource.name}
+          {moneySourceData.length == 0 ? (
+            <Typography variant="body1" color="secondary">
+              Try adding money sources
+            </Typography>
+          ) : (
+            <Grid container spacing={3} className={classes.initiallyTopMargin}>
+              <div className={classes.root}>
+                {moneySourceData.map((moneySource) => (
+                  <Grid item key={moneySource.id} xs={5} md={3} lg={3}>
+                    <Paper className={classes.drawerPaper}>
+                      <div className={classes.container}>
+                        <Typography component="p" variant="h6">
+                          {moneySource.name}
+                        </Typography>
+                        <Button
+                          color="secondary"
+                          // name={moneySource.id}
+                          id={moneySource.id}
+                          onClick={deleteHandler}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                      <Typography color="textSecondary">
+                        {getAmount(moneySource)} JOD
                       </Typography>
-                      <Button
-                        color="secondary"
-                        // name={moneySource.id}
-                        id={moneySource.id}
-                        onClick={deleteHandler}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                    <Typography color="textSecondary">
-                      {getAmount(moneySource)} JOD
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </div>
-          </Grid>
+                    </Paper>
+                  </Grid>
+                ))}
+              </div>
+            </Grid>
+          )}
         </Grid>
         <Grid item md={3}>
           <form

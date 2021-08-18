@@ -7,6 +7,7 @@ import ApiDataContextProvider from "../src/context/apiData";
 import Welcome from "./welcome";
 // import BeefyWalletAdmin from "../src/context/BeefyWalletAdmin";
 import SignIn from "./app/login";
+import SignUp from "./app/signup";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import HeadHtml from "../src/context/headHtml";
 import dynamic from "next/dynamic";

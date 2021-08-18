@@ -9,7 +9,7 @@ export const ApiDataContext = createContext();
 
 const ApiDataContextProvider = (props) => {
   const [isLoading, setLoading] = useState(true);
-  const [moneySourceData, setmoneySourceData] = useState();
+  const [moneySourceData, setmoneySourceData] = useState([]);
   const [transactionsData, setTransactionsData] = useState();
   const [quotesData, setquotesData] = useState();
   const [adsData, setAdsData] = useState();

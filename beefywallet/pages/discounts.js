@@ -69,7 +69,7 @@ export default function Advice() {
                     className={classes.root}
                     component="img"
                     alt="Discount"
-                    height="100"
+                    width="170"
                     image={item.image}
                     title="Discount"
                   />

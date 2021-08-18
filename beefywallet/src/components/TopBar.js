@@ -76,11 +76,11 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
         noWrap
         className={classes.title}
       >
-        {isLoading && !moneySourceData
-          ? "Getting your Data"
-          : "Hi " +
+        {!isLoading && moneySourceData.length != 0
+          ? "Hi " +
             moneySourceData[0].author.username[0].toUpperCase() +
-            moneySourceData[0].author.username.slice(1)}
+            moneySourceData[0].author.username.slice(1)
+          : "Getting your Data"}
       </Typography>
       <Button
         onClick={handleClick({ vertical: "bottom", horizontal: "right" })}

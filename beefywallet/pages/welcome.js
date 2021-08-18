@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     borderRadius: 3,
     boxShadow: "0 3px 5px 2px #3c5186",
-    color: "black",
+    // color: "black",
     height: 30,
     width: 300,
     padding: "0 20px",
@@ -97,7 +97,11 @@ export default function Welcome() {
                 "and we will suggest advice for you and offers to have better experince with us"
               }
             </Typography>
-            <Typography className={classes.typo} variant="subtitle1">
+            <Typography
+              className={classes.typo}
+              variant="subtitle1"
+              color="primary"
+            >
               Join Now And Be More Controler
             </Typography>
             <br />
