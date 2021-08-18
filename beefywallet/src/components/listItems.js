@@ -12,6 +12,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HelpIcon from "@material-ui/icons/Help";
+import InfoIcon from "@material-ui/icons/Info";
 // import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Link from "next/link";
 export const mainListItems = (
@@ -88,13 +89,6 @@ export const secondaryListItems = (
   <div>
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
 
-    <ListItem button onClick={SignOutHandler}>
-      <ListItemIcon>
-        <ExitToAppIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign out" />
-    </ListItem>
-
     <Link href="/help">
       <ListItem button>
         <ListItemIcon>
@@ -103,5 +97,19 @@ export const secondaryListItems = (
         <ListItemText primary="Help" />
       </ListItem>
     </Link>
+    <Link href="/about-us">
+      <ListItem button>
+        <ListItemIcon>
+          <InfoIcon />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
+    </Link>
+    <ListItem button onClick={SignOutHandler}>
+      <ListItemIcon>
+        <ExitToAppIcon />
+      </ListItemIcon>
+      <ListItemText primary="Sign out" />
+    </ListItem>
   </div>
 );

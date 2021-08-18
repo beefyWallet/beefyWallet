@@ -13,6 +13,7 @@ import ReportsDashboard from "../../src/components/ReportDashboard";
 import PieChart from "../../src/components/Chart";
 import MoneySourceChart from "../../src/components/MoneySourceChart";
 import { Typography } from "@material-ui/core";
+import PageHeader from "../../src/components/PageHeader";
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -24,11 +25,7 @@ export default function Dashboard() {
   }
   return (
     <React.Fragment>
-      <Grid item xs={12}>
-        <Paper className={classes.initiallyHeight}>
-          <h1 className="text-2xl">Dashboard</h1>
-        </Paper>
-      </Grid>
+      <PageHeader title="Dashboard" />
 
       <Grid container spacing={3}>
         <Grid item xs={12}>
