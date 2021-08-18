@@ -22,10 +22,10 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 2,
   },
   marginbottom: {
-    marginBottom: theme.spacing(5),
+    marginBottom: theme.spacing(3),
   },
   marginleft: {
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(6),
   },
   icon: {
     marginLeft: theme.spacing(5),
@@ -110,6 +110,7 @@ export default function CurrentConverter() {
                 onClick={handleSubmit}
                 style={{
                   marginTop: 10,
+                  height: 70,
                 }}
               >
                 Convert
