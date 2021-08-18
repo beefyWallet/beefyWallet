@@ -13,6 +13,7 @@ import { red } from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { ApiDataContext } from "../src/context/apiData";
+import PageHeader from "../src/components/PageHeader";
 const useStyles = makeStyles((theme) => ({
   marginBetween: {
     marginBottom: 20,
@@ -57,13 +58,8 @@ export default function Advice() {
 
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Paper className={classes.initiallyHeight}>
-            <h1 className="text-2xl">Discount's</h1>
-          </Paper>
-        </Grid>
-
+      <PageHeader title="Discounts" />
+      <Grid>
         {adsData.map((item) => (
           <Grid item xs={12} className={classes.marginBetween}>
             <Paper>
@@ -73,7 +69,7 @@ export default function Advice() {
                     className={classes.root}
                     component="img"
                     alt="Discount"
-                    height="100"
+                    width="170"
                     image={item.image}
                     title="Discount"
                   />

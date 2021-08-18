@@ -82,12 +82,18 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 240,
+    // height: 240,
   },
   initiallyHeight: {
     padding: theme.spacing(1),
     textAlign: "center",
     // height: 50,
+  },
+  pageHeader: {
+    marginTop: 20,
+    marginBottom: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
   },
 }));
 

@@ -22,6 +22,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import { ApiDataContext } from "../src/context/apiData";
+import PageHeader from "../src/components/PageHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,13 +62,8 @@ export default function Advice() {
 
   return (
     <>
+      <PageHeader title="Quotes" />
       <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Paper className={classes.initiallyHeight}>
-            <h1 className="text-2xl">Advice</h1>
-          </Paper>
-        </Grid>
-
         {quotesData.map((item) => (
           <Grid item xs={4} spacing={2}>
             <Card className={classes.root}>

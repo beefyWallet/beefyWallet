@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   initiallyTopMargin: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
     marginBottom: theme.spacing(3),
   },
   button: {
@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     margin: theme.spacing(1),
     width: "25ch",
+  },
+  containerPaper: {
+    padding: 20,
   },
 }));
 
@@ -120,72 +123,40 @@ export default function MoneySources() {
     <React.Fragment>
       <Grid container>
         <Grid item md={9}>
-          <Grid container spacing={3} className={classes.initiallyTopMargin}>
-            <div className={classes.root}>
-              {moneySourceData.map((moneySource) => (
-                <Grid item key={moneySource.id} xs={5} md={3} lg={3}>
-                  <Paper className={classes.drawerPaper}>
-                    <div className={classes.container}>
-                      <Typography component="p" variant="h6">
-                        {moneySource.name}
+          {moneySourceData.length == 0 ? (
+            <Typography variant="body1" color="secondary">
+              Try adding money sources
+            </Typography>
+          ) : (
+            <Grid container spacing={3} className={classes.initiallyTopMargin}>
+              <div className={classes.root}>
+                {moneySourceData.map((moneySource) => (
+                  <Grid item key={moneySource.id} xs={5} md={3} lg={3}>
+                    <Paper className={classes.containerPaper}>
+                      <div className={classes.container}>
+                        <Typography component="p" variant="h6">
+                          {moneySource.name}
+                        </Typography>
+                        <Button
+                          color="secondary"
+                          // name={moneySource.id}
+                          id={moneySource.id}
+                          onClick={deleteHandler}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                      <Typography color="textSecondary">
+                        {getAmount(moneySource)} JOD
                       </Typography>
-                      <Button
-                        color="secondary"
-                        // name={moneySource.id}
-                        id={moneySource.id}
-                        onClick={deleteHandler}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                    <Typography color="textSecondary">
-                      {getAmount(moneySource)} JOD
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </div>
-          </Grid>
-        </Grid>
-        <Grid item md={3}>
-          <form
-            className={classes.initiallyTopMargin}
-            noValidate
-            autoComplete="off"
-          >
-            <Grid container>
-              <Grid item md={12}>
-                <TextField
-                  id="amount"
-                  label="Amount"
-                  variant="outlined"
-                  name="amount"
-                  fullWidth
-                  onChange={handleChange}
-                />
-                <TextField
-                  id="name"
-                  label="Name"
-                  variant="outlined"
-                  name="name"
-                  fullWidth
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item md={12}>
-                <Button
-                  type="submit"
-                  variant="outlined"
-                  fullWidth
-                  color="primary"
-                  onClick={handleSubmit}
-                >
-                  Add Source
-                </Button>
-              </Grid>
+                    </Paper>
+                  </Grid>
+                ))}
+              </div>
             </Grid>
-          </form>
+          )}
         </Grid>
+        <Grid item md={3}></Grid>
       </Grid>
     </React.Fragment>
   );

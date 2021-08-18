@@ -12,6 +12,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HelpIcon from "@material-ui/icons/Help";
+import InfoIcon from "@material-ui/icons/Info";
 // import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Link from "next/link";
 export const mainListItems = (
@@ -25,12 +26,12 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link href="/Advice">
+    <Link href="/quotes">
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Advice" />
+        <ListItemText primary="Quotes" />
       </ListItem>
     </Link>
 
@@ -52,7 +53,7 @@ export const mainListItems = (
       </ListItem>
     </Link> */}
 
-    <Link href="/Reports">
+    <Link href="/reports">
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
@@ -61,12 +62,12 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link href="/Discount">
+    <Link href="/discounts">
       <ListItem button>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Discount" />
+        <ListItemText primary="Discounts" />
       </ListItem>
     </Link>
     <Link href="/currency-converter">
@@ -87,25 +88,28 @@ function SignOutHandler(event) {
 export const secondaryListItems = (
   <div>
     {/* <ListSubheader inset>Saved reports</ListSubheader> */}
-    <ListItem button>
-      <ListItemIcon>
-        <AccountCircleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Account" />
-    </ListItem>
 
+    <Link href="/help">
+      <ListItem button>
+        <ListItemIcon>
+          <HelpIcon />
+        </ListItemIcon>
+        <ListItemText primary="Help" />
+      </ListItem>
+    </Link>
+    <Link href="/about-us">
+      <ListItem button>
+        <ListItemIcon>
+          <InfoIcon />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
+    </Link>
     <ListItem button onClick={SignOutHandler}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>
       <ListItemText primary="Sign out" />
-    </ListItem>
-
-    <ListItem button>
-      <ListItemIcon>
-        <HelpIcon />
-      </ListItemIcon>
-      <ListItemText primary="Help" />
     </ListItem>
   </div>
 );

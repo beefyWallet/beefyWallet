@@ -12,6 +12,7 @@ import { ApiDataContext } from "../context/apiData";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import NotificationMenuAds from "./NotificationMenuAds";
+import PdfGemerator from "./ConvertToPdf";
 
 import clsx from "clsx";
 
@@ -76,17 +77,23 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
         noWrap
         className={classes.title}
       >
-        {isLoading && !moneySourceData
-          ? "Getting your Data"
-          : "Hi " +
+        {!isLoading && moneySourceData.length != 0
+          ? "Hi " +
             moneySourceData[0].author.username[0].toUpperCase() +
-            moneySourceData[0].author.username.slice(1)}
+            moneySourceData[0].author.username.slice(1)
+          : "Getting your Data"}
       </Typography>
       <Button
+        disableElevation
+        variant="contained"
+        style={{
+          marginRight: 10,
+        }}
         onClick={handleClick({ vertical: "bottom", horizontal: "right" })}
       >
         Advice?
       </Button>
+      <PdfGemerator />
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={open1}

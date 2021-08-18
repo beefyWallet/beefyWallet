@@ -84,7 +84,13 @@ const PdfGemerator = () => {
     doc.save("data.pdf");
   };
   return (
-    <Button onClick={jspdfGenerator} variant="contained" color="primary">
+    <Button
+      onClick={jspdfGenerator}
+      disableElevation
+      variant="contained"
+
+      // color="primary"
+    >
       Download Data
     </Button>
   );

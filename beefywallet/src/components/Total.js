@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { useContext, useState } from "react";
 import { ApiDataContext } from "../context/apiData";
 import PdfGemerator from "./ConvertToPdf";
+import AddMoneySourceForm from "./AddMoneySourceForm";
 // import Title from './Title'
 
 function preventDefault(event) {
@@ -17,6 +18,7 @@ const useStyles = makeStyles({
   },
   total: {
     marginBottom: 15,
+    marginTop: 15,
   },
 });
 
@@ -59,9 +61,10 @@ export default function Total() {
         {moneySourceData.reduce((total, item) => {
           return (total = total + getAmount(item));
         }, 0)}
-        JOD
+        &nbsp;JOD
       </Typography>
-      <PdfGemerator />
+
+      <AddMoneySourceForm />
     </React.Fragment>
   );
 }

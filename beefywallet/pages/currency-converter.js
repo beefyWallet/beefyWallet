@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import PageHeader from "../src/components/PageHeader";
 
 const useStyles = makeStyles({
   totalContext: {
@@ -40,9 +41,7 @@ export default function CurrentConverter() {
   const classes = useStyles();
   return (
     <>
-      <Typography color="textSecondary" variant="h5" className={classes.total}>
-        Money converter
-      </Typography>
+      <PageHeader title="Currency Converter" />
       <Grid container>
         <Grid item md={8}>
           <form
