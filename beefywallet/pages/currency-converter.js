@@ -85,7 +85,11 @@ export default function CurrentConverter() {
                 className={classes.width}
                 onChange={e => setFirst(e.target.value.toUpperCase())}
               />
-              <SyncAltIcon style={{ fontSize: 40 }} className={classes.icon} />
+              <SyncAltIcon
+                style={{ fontSize: 43 }}
+                color="primary"
+                className={classes.icon}
+              />
               <TextField
                 id="second"
                 label="Currency 2"
