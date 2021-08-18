@@ -18,7 +18,6 @@ const BeefyWalletAdminn = dynamic(
 );
 export default function MyApp(props) {
   const router = useRouter();
-  console.log(router.pathname);
 
   const { Component, pageProps } = props;
 

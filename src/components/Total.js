@@ -46,8 +46,7 @@ export default function Total() {
         return total;
       }
     }, 0);
-    // console.log(expenesTotal);
-    // console.log(IncomesTotal);
+
     return moneySource.amount - expenesTotal + IncomesTotal;
   }
   const classes = useStyles();

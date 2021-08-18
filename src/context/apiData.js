@@ -15,16 +15,16 @@ const ApiDataContextProvider = (props) => {
   const [adsData, setAdsData] = useState();
   const [changeState, setChangeState] = useState();
 
-  let adsUrl = "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/ads/";
+  let adsUrl = "https://beefy-wallet-api.herokuapp.com/beefy_wallet_api/ads/";
 
   let moneySourcesUrl =
-    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/money_sources/";
+    "https://beefy-wallet-api.herokuapp.com/beefy_wallet_api/money_sources/";
 
   let transactionsUrl =
-    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/transactions/";
+    "https://beefy-wallet-api.herokuapp.com/beefy_wallet_api/transactions/";
 
   let quotesUrl =
-    "http://beefy-wallet-api.herokuapp.com/beefy_wallet_api/quotes/";
+    "https://beefy-wallet-api.herokuapp.com/beefy_wallet_api/quotes/";
 
   const ISSERVER = typeof window === "undefined";
   if (!ISSERVER) {
@@ -45,7 +45,6 @@ const ApiDataContextProvider = (props) => {
     const adsDataAPI = await axios.get(adsUrl, config);
     setAdsData(adsDataAPI.data);
     setLoading(false);
-    // console.log(isLoading);
   }
 
   const addMoneySource = (data) => {
@@ -81,7 +80,6 @@ const ApiDataContextProvider = (props) => {
         )
         .then(
           (response) => {
-            console.log(response);
             setChangeState(uuidv4());
           },
           (error) => {
@@ -95,12 +93,10 @@ const ApiDataContextProvider = (props) => {
   };
   const DeleteTransaction = (data) => {
     let url = transactionsUrl + data + "/";
-    console.log(url);
     const config = { headers: { Authorization: "Bearer " + token } };
     axios
       .delete(url, config)
       .then((response) => {
-        console.log(response);
         setChangeState(uuidv4());
       })
       .catch((error) => {
@@ -110,12 +106,10 @@ const ApiDataContextProvider = (props) => {
   };
   const DeleteMoneySource = (data) => {
     let url = moneySourcesUrl + data + "/";
-    console.log(url);
     const config = { headers: { Authorization: "Bearer " + token } };
     axios
       .delete(url, config)
       .then((response) => {
-        console.log(response);
         setChangeState(uuidv4());
       })
       .catch((error) => {

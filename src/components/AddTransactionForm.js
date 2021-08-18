@@ -80,7 +80,6 @@ export default function AddTransactionForm({}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     addTransaction(formData);
     setOpen(false);
   };

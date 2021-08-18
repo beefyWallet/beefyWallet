@@ -52,7 +52,6 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     axiosInstance
       .post(`token/`, {
@@ -65,8 +64,6 @@ export default function SignIn() {
         axiosInstance.defaults.headers["Authorization"] =
           "Bearer " + localStorage.getItem("access_token");
         router.push("/");
-        //console.log(res);
-        //console.log(res.data);
       });
   };
 

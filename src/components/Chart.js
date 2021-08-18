@@ -112,7 +112,6 @@ export default BarChart;
 // }
 //
 // export default function PieChart({ transactionsData }) {
-//   console.log(transactionsData);
 //   const categories = {};
 //   transactionsData.map((item) => {
 //     categories[item.category]

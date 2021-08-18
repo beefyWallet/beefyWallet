@@ -115,7 +115,6 @@ export default function MoneySources() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     addMoneySource(formData);
   };
 

@@ -28,7 +28,6 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
 
   const handleClick = (newState) => () => {
     setState({ open1: true, ...newState });
-    // console.log("Clocked");
   };
 
   const handleClose = () => {
@@ -50,12 +49,10 @@ const TopBar = ({ open, setOpen, classes, setThemeMode }) => {
   };
   function randomNumber() {
     if (!isLoading) {
-      // console.log(quotesData);
       let quoteLength = quotesData.length;
       let min = 0;
       let max = Math.floor(quoteLength);
       let rand = Math.floor(Math.random() * (max - min) + min);
-      // console.log(quotesData);
       return quotesData[rand].quote;
     }
   }

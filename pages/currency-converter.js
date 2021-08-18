@@ -43,13 +43,11 @@ export default function CurrentConverter() {
   const [rate, setRate] = useState(0);
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(getPair(first, second));
   }
   function getPair(first, second) {
     let url = `https://free.currconv.com/api/v7/convert?q=${first}_${second}&compact=ultra&apiKey=03a707a84ec370857f4f`;
     axios.get(url).then((res) => {
       setRate(res.data[`${first}_${second}`]);
-      console.log(rate);
     });
   }
   const classes = useStyles();

@@ -68,8 +68,6 @@ export default function Reports({ transactionsData }) {
     addTransaction(formData);
   };
   const deleteHandler = (e) => {
-    // console.log(e.currentTarget.id);
-    // console.log(e.currentTarget.name);
     DeleteTransaction(e.currentTarget.id);
   };
   const classes = useStyles();

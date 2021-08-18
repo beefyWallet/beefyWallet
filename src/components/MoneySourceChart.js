@@ -15,7 +15,6 @@ const MoneySourceChart = () => {
         : (categories[item.money_source.name] = item.value);
     }
   });
-  console.log(categories);
   return (
     <div>
       <Pie

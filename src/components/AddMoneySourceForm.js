@@ -84,7 +84,6 @@ export default function AddMoneySourceForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     addMoneySource(formData);
     setOpen(false);
   };

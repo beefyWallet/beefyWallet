@@ -52,7 +52,6 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     axiosInstance
       .post(`rest-auth/registration/`, {
@@ -61,9 +60,6 @@ export default function SignUp() {
         password2: formData.password2,
       })
       .then((res) => {
-        // history.push('/login');
-        console.log(res);
-        console.log(res.data);
         router.push("/app/login");
       });
   };
