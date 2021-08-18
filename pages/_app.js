@@ -47,7 +47,7 @@ export default function MyApp(props) {
       }),
     [prefersDarkMode]
   );
-  if (router.pathname == "/app/signin") {
+  if (router.pathname == "/app/login") {
     return (
       <ThemeProvider theme={theme}>
         <SignIn />
