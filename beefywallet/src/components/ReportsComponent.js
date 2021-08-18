@@ -27,7 +27,10 @@ function getDate(date) {
   }-${newDate.getDate()}`;
 }
 
-export default function ReportsComponent() {
+export default function ReportsComponent({ numberOfRows }) {
+  if (!numberOfRows) {
+    numberOfRows = 99999999999999999999999;
+  }
   const classes = useStyles();
   const { isLoading, transactionsData, addTransaction, DeleteTransaction } =
     useContext(ApiDataContext);
@@ -54,33 +57,35 @@ export default function ReportsComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactionsData.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{getDate(row.creation_date)}</TableCell>
-              <TableCell>{row.money_source.name}</TableCell>
-              <TableCell>
-                {row.transaction_type == "Incomes" ? (
-                  <ArrowUpwardIcon color="primary" />
-                ) : (
-                  <ArrowDownwardIcon color="secondary" />
-                )}
-                {row.transaction_type}
-              </TableCell>
-              <TableCell>{row.category}</TableCell>
-              <TableCell>{row.value} &nbsp; JOD</TableCell>
-              <TableCell>{row.note}</TableCell>
-              <TableCell>
-                <Button
-                  color="secondary"
-                  name={row.id}
-                  id={row.id}
-                  onClick={deleteHandler}
-                >
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+          {transactionsData.map((row, index) =>
+            index < numberOfRows ? (
+              <TableRow key={row.id}>
+                <TableCell>{getDate(row.creation_date)}</TableCell>
+                <TableCell>{row.money_source.name}</TableCell>
+                <TableCell>
+                  {row.transaction_type == "Incomes" ? (
+                    <ArrowUpwardIcon color="primary" />
+                  ) : (
+                    <ArrowDownwardIcon color="secondary" />
+                  )}
+                  {row.transaction_type}
+                </TableCell>
+                <TableCell>{row.category}</TableCell>
+                <TableCell>{row.value} &nbsp; JOD</TableCell>
+                <TableCell>{row.note}</TableCell>
+                <TableCell>
+                  <Button
+                    color="secondary"
+                    name={row.id}
+                    id={row.id}
+                    onClick={deleteHandler}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ) : null
+          )}
         </TableBody>
       </Table>
     </React.Fragment>

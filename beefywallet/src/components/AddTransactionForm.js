@@ -16,6 +16,11 @@ import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import { Grid } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -23,16 +28,27 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     // margin: theme.spacing(1),
-    minWidth: "20%",
+    // minWidth: "20%",
+    marginBottom: 14,
+    marginRight: 10,
   },
   form: {
-    display: "flex",
-    justifyContent: "space-between",
+    // display: "flex",
+    // justifyContent: "space-between",
     marginBottom: 20,
   },
 }));
 
-export default function AddTransactionForm({ transactionsData }) {
+export default function AddTransactionForm({}) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   let categories = [
     "Food-Drinks",
     "Shopping",
@@ -66,81 +82,113 @@ export default function AddTransactionForm({ transactionsData }) {
     e.preventDefault();
     console.log(formData);
     addTransaction(formData);
+    setOpen(false);
   };
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Add Transaction</Title>
-      <form noValidate autoComplete="off">
-        <div className={classes.form}>
-          <TextField
-            id="value"
-            label="Value"
-            variant="outlined"
-            name="value"
-            onChange={handleChange}
-          />
-          <FormControl className={classes.formControl}>
-            <TextField
-              label="transaction_type"
-              select
-              id="transaction_type"
-              // value={transaction}
-              name="transaction_type"
-              onChange={handleChange}
-              variant="outlined"
-            >
-              <MenuItem value="Incomes">Income</MenuItem>
-              <MenuItem value="Expenses">Expense</MenuItem>
-            </TextField>
-          </FormControl>
-          <TextField
-            id="note"
-            label="note"
-            variant="outlined"
-            name="note"
-            onChange={handleChange}
-            className={classes.formControl}
-          />
-          <FormControl className={classes.formControl}>
-            <TextField
-              label="category"
-              select
-              id="category"
-              name="category"
-              onChange={handleChange}
-              variant="outlined"
-            >
-              {categories.map((item) => {
-                return <MenuItem value={item}>{item}</MenuItem>;
-              })}
-            </TextField>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <TextField
-              label="money_source"
-              select
-              id="money_source"
-              name="money_source"
-              onChange={handleChange}
-              variant="outlined"
-            >
-              {moneySourceData.map((item) => {
-                return <MenuItem value={item.name}>{item.name}</MenuItem>;
-              })}
-            </TextField>
-          </FormControl>
-        </div>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-        >
-          Add Transaction
-        </Button>
-      </form>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        Add Transaction
+      </Button>
+      <Dialog
+        // fullWidth=""
+        maxWidth="false"
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add Transaction</DialogTitle>
+        <DialogContent>
+          <form noValidate autoComplete="off">
+            <Grid container>
+              {/* <div className={classes.form}> */}
+              <Grid item xs={3} lg={6}>
+                <TextField
+                  id="value"
+                  label="Value"
+                  variant="outlined"
+                  name="value"
+                  fullWidth
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={3} lg={6}>
+                <FormControl fullWidth className={classes.formControl}>
+                  <TextField
+                    label="transaction_type"
+                    select
+                    id="transaction_type"
+                    // value={transaction}
+                    name="transaction_type"
+                    onChange={handleChange}
+                    variant="outlined"
+                  >
+                    <MenuItem value="Incomes">Income</MenuItem>
+                    <MenuItem value="Expenses">Expense</MenuItem>
+                  </TextField>
+                </FormControl>
+              </Grid>
+              <Grid item lg={12}>
+                <TextField
+                  id="note"
+                  fullWidth
+                  label="note"
+                  variant="outlined"
+                  name="note"
+                  onChange={handleChange}
+                  className={classes.formControl}
+                />
+              </Grid>
+              <Grid item lg={6}>
+                <FormControl fullWidth className={classes.formControl}>
+                  <TextField
+                    label="category"
+                    select
+                    id="category"
+                    name="category"
+                    onChange={handleChange}
+                    variant="outlined"
+                  >
+                    {categories.map((item) => {
+                      return <MenuItem value={item}>{item}</MenuItem>;
+                    })}
+                  </TextField>
+                </FormControl>
+              </Grid>
+              <Grid item lg={6}>
+                <FormControl fullWidth className={classes.formControl}>
+                  <TextField
+                    label="money_source"
+                    select
+                    id="money_source"
+                    name="money_source"
+                    onChange={handleChange}
+                    variant="outlined"
+                  >
+                    {moneySourceData.map((item) => {
+                      return <MenuItem value={item.name}>{item.name}</MenuItem>;
+                    })}
+                  </TextField>
+                </FormControl>
+              </Grid>
+
+              {/* </div> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                Add Transaction
+              </Button>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+            </Grid>
+          </form>
+        </DialogContent>
+      </Dialog>
     </React.Fragment>
   );
 }

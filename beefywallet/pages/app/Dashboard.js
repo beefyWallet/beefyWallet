@@ -58,9 +58,9 @@ export default function Dashboard() {
           </Paper>
         </Grid>
 
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <AddTransactionForm transactionsData={transactionsData} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
